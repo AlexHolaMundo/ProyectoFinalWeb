@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+#modelo CLiente
 class Cliente(models.Model):
     idCliente = models.AutoField(primary_key=True)
     cedula = models.CharField(max_length=10)
@@ -12,6 +13,7 @@ class Cliente(models.Model):
     def __str__(self):
         fila="{0} => {1} => {2} => {3} => {4} => {5}"
         return fila.format(self.idCliente, self.cedula, self.nombre, self.direccion, self.email, self.telefono)
+#modelo Proveedor
 class Proveedor(models.Model):
     idProveedor=models.AutoField(primary_key=True)
     nombre=models.CharField(max_length=50)
@@ -23,6 +25,7 @@ class Proveedor(models.Model):
     def __str__(self):
         fila='{1} {2} {3} {4} {5} {6}'
         return fila.format(self.idProveedor, self.nombre, self.email, self.pais, self.ciudad, self.logo)
+#modelo Catalogo
 class Catalogo(models.Model):
     idCatalogo=models.AutoField(primary_key=True)
     categoria=models.CharField(max_length=50)
