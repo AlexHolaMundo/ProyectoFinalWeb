@@ -59,3 +59,16 @@ class Producto(models.Model):
     def __str__(self):
         fila='{0} = {1} = {2} = {3} = {4} = {5} = {6}'
         return fila.format(self.idProducto, self.nombre, self.precio, self.descripcion,self.stock, self.catalogo, self.proveedor)
+
+class Detalle(models.Model):
+    idDetalle=models.AutoField(primary_key=True)
+    cantidad=models.IntegerField()
+    precioUnitario=models.DecimalField(max_digits=10, decimal_places=2)
+    descuento=models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal=models.DecimalField(max_digits=10, decimal_places=2)
+    pedido=models.ForeignKey(Pedido, null=True, blank=True, on_delete=models.CASCADE)
+    producto=models.ForeignKey(Producto, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        fila ='{0} = {1} = {2} = {3} = {4} = {5} = {6}'
+        return fila.format(self.idDetalle, self.cantidad, self.precioUnitario, self.descuento, self.subtotal, self.pedido, self.producto)
