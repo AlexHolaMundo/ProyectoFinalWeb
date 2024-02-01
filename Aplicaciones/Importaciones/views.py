@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Cliente, Proveedor, Catalogo, Pedido, Producto
+from .models import Cliente, Proveedor, Catalogo, Pedido, Producto, Detalle
 
 # Create your views here.
 def plantilla(request):
@@ -29,3 +29,8 @@ def listaPedidos(request):
 def listaProductos(request):
     productoBdd=Producto.objects.all()
     return render(request, 'listaProductos.html', {'productos':productoBdd})
+
+#Listar datos de la tabla Detalle
+def listaDetalles(request):
+    detalleBdd=Detalle.objects.all()
+    return render(request, 'listaDetalles.html', {'detalles':detalleBdd})
