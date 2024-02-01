@@ -19,3 +19,13 @@ def listaProveedores(request):
 def listaCatalogos(request):
     catalogoBdd=Catalogo.objects.all()
     return render(request, 'listaCatalogos.html', {'catalogos':catalogoBdd})
+
+#Listar datos de la tabla Pedido
+def listaPedidos(request):
+    pedidoBdd=Pedido.objects.all()
+    return render(request, 'listaPedidos.html', {'pedidos':pedidoBdd})
+
+#Listar datos de la tabla Producto
+def listaProductos(request):
+    productoBdd=Producto.objects.all()
+    return render(request, 'listaProductos.html', {'productos':productoBdd})
