@@ -21,7 +21,7 @@ class Proveedor(models.Model):
     logo=models.FileField(upload_to='proveedores', null=True, blank=True)
 
     def __str__(self):
-        fila='{1} {2} {3} {4} {5} {6}'
+        fila='{0} {1} {2} {3} {4} {5}'
         return fila.format(self.idProveedor, self.nombre, self.email, self.pais, self.ciudad, self.logo)
 class Catalogo(models.Model):
     idCatalogo=models.AutoField(primary_key=True)
@@ -29,6 +29,17 @@ class Catalogo(models.Model):
     descripcion=models.CharFiled(max_length=150)
 
     def __str__(self):
-        fila='{1} {2} {3}'
+        fila='{0} {1} {2}'
         return fila.format(self.idCatalogo, self.categoria, self.descripcion)
 
+class Pedido(models.Model):
+    idPedido=models.AutoField(primary_key=True)
+    fechaPedido=models.DateField()
+    fechaEntrega=models.DateField()
+    observaciones=models.CharField(max_length=150)
+    direccionEntrega=models.CharField(max_length=150)
+    cliente=models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        fila='{0} {1} {2} {3} {4}'
+        return fila.format(self.idPedido, self.fechaPedido, self.fechaEntrega, self.observaciones, self.direccionEntrega, self.cliente)
