@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Proveedor, Catalogo, Pedido, Producto, Detalle
+from django.contrib import messages
 
 # Create your views here.
 def plantilla(request):
@@ -14,6 +15,23 @@ def listaClientes(request):
 def listaProveedores(request):
     proveedorBdd=Proveedor.objects.all()
     return render(request, 'listaProveedores.html', {'proveedores':proveedorBdd})
+
+#Guardar datos de la tabla Proveedores
+def guardarProveedor(request):
+    nombre=request.POST['nombre']
+    email=request.POST['email']
+    pais=request.POST['pais']
+    ciudad=request.POST['ciudad']
+    logo=request.FILES.get('logo')
+    nuevoProveedor=Proveedor.objects.create(
+        nombre=nombre,
+        email=email,
+        pais=pais,
+        ciudad=ciudad,
+        logo=logo
+    )
+    messages.success(request, "Proveedor guardado correctamente")
+    return redirect('/listaProveedores')
 
 #Listar datos de la tabla Catalogo
 def listaCatalogos(request):
