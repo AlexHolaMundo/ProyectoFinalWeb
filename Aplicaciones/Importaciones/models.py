@@ -23,7 +23,7 @@ class Proveedor(models.Model):
     logo=models.FileField(upload_to='proveedores', null=True, blank=True)
 
     def __str__(self):
-        fila='{0} = {1} {2} {3} {4} {5}'
+        fila='{0} = {1} = {2} {3} {4} {5}'
         return fila.format(self.idProveedor, self.nombre, self.email, self.pais, self.ciudad, self.logo)
 #modelo Catalogo
 class Catalogo(models.Model):
