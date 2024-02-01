@@ -11,7 +11,7 @@ def listaClientes(request):
     clienteBdd=Cliente.objects.all()
     return render(request, 'listaClientes.html', {'clientes':clienteBdd})
 #guardar cliente
-def guardarCliente(request)
+def guardarCliente(request):
         cedula=request.POST["cedula"]
         nombre=request.POST["nombre"]
         direccion=request.POST["direccion"]
@@ -20,7 +20,7 @@ def guardarCliente(request)
         nuevoCliente=Cliente.objects.create(cedula=cedula, nombre=nombre, direccion=direccion, email=email, telefono=telefono)
         messages.success(request, 'Cliete guardado correctamente')
         return redirect('listaClientes')
-        
+
 #Lsitar datos de la tabla Proveedor
 def listaProveedores(request):
     proveedorBdd=Proveedor.objects.all()
