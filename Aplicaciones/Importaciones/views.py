@@ -9,7 +9,7 @@ def home(request):
 #Listar datos de la tabla Cliente
 def listaClientes(request):
     clienteBdd=Cliente.objects.all()
-    return render(request, 'listaClientes.html', {'clientes':clienteBdd})
+    return render(request, 'Cliente/listaClientes.html', {'clientes':clienteBdd})
 #guardar cliente
 def guardarCliente(request):
         cedula=request.POST["cedula"]
