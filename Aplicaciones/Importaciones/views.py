@@ -3,8 +3,8 @@ from .models import Cliente, Proveedor, Catalogo, Pedido, Producto, Detalle
 from django.contrib import messages
 
 # Create your views here.
-def plantilla(request):
-    return render(request, 'plantilla.html')
+def home(request):
+    return render(request, 'index.html')
 
 #Listar datos de la tabla Cliente
 def listaClientes(request):

@@ -29,7 +29,7 @@ class Proveedor(models.Model):
 class Catalogo(models.Model):
     idCatalogo=models.AutoField(primary_key=True)
     categoria=models.CharField(max_length=50)
-    descripcion=models.CharFiled(max_length=150)
+    descripcion=models.CharField(max_length=150)
 
     def __str__(self):
         fila='{0} => {1} => {2}'

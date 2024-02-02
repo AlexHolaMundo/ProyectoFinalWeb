@@ -1,3 +1,3 @@
 from django.urls import path
 from . import views
-urlpatterns = [path('', views.plantilla),]
+urlpatterns = [path('', views.home),]
