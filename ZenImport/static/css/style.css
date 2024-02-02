@@ -1241,3 +1241,28 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+/*--------------------------------------------------------------
+# Botones editar Eliminar
+--------------------------------------------------------------*/
+.btn-editar {
+  background-color: #ebb64d;
+  color: #fff;
+  padding: 8px 30px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+}
+.btn-editar:hover {
+  background: #e89b00;
+}
+.btn-eliminar {
+  background-color: #9b60be;
+  color: #fff;
+  padding: 8px 30px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+}
+.btn-eliminar:hover {
+  background: #7302b5;
+}

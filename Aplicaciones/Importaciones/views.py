@@ -19,7 +19,7 @@ def guardarCliente(request):
         telefono=request.POST["telefono"]
         nuevoCliente=Cliente.objects.create(cedula=cedula, nombre=nombre, direccion=direccion, email=email, telefono=telefono)
         messages.success(request, 'Cliete guardado correctamente')
-        return redirect('listaClientes')
+        return redirect('/listaClientes')
 
 #Lsitar datos de la tabla Proveedor
 def listaProveedores(request):
