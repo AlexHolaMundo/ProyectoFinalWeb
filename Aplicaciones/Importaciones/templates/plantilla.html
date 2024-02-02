@@ -8,6 +8,42 @@
     <title>ZenImport</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"
+    />
+
+    <!-- DataTables Buttons CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"
+    />
+
+    <!-- DataTables JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"
+    ></script>
+
+    <!-- DataTables Buttons JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"
+    ></script>
 
     <!-- Favicons -->
     <link href="{% static 'img/zen.jpeg'%}" rel="icon" />
@@ -42,6 +78,7 @@
       href="{% static 'vendor/remixicon/remixicon.css'%}"
       rel="stylesheet"
     />
+
     <link
       href="{% static 'vendor/simple-datatables/style.css'%}"
       rel="stylesheet"
@@ -49,12 +86,6 @@
 
     <!-- Template Main CSS File -->
     <link href="{% static 'css/style.css'%}" rel="stylesheet" />
-
-    <!-- Datatables -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
-    />
   </head>
 
   <body>
@@ -438,7 +469,6 @@
       class="back-to-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
-
     <!-- Vendor JS Files -->
     <script src="{% static 'vendor/apexcharts/apexcharts.min.js'%}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
@@ -451,5 +481,7 @@
 
     <!-- Template Main JS File -->
     <script src="{% static 'js/main.js'%}"></script>
+    <!-- Datatables -->
+    <script src="{% static 'js/exports.js'%}"></script>
   </body>
 </html>

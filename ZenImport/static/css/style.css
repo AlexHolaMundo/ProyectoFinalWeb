@@ -1245,24 +1245,124 @@ h6 {
 # Botones editar Eliminar
 --------------------------------------------------------------*/
 .btn-editar {
-  background-color: #ebb64d;
+  background-color: #2fcc73;
   color: #fff;
-  padding: 8px 30px;
+  padding: 8px 15px;
   border-radius: 4px;
   transition: 0.4s;
   margin-right: 10px;
 }
 .btn-editar:hover {
-  background: #e89b00;
+  background: #00b74f;
+  color: white;
 }
 .btn-eliminar {
-  background-color: #9b60be;
+  background-color: #ffc107;
   color: #fff;
-  padding: 8px 30px;
+  padding: 8px 15px;
   border-radius: 4px;
   transition: 0.4s;
   margin-right: 10px;
 }
 .btn-eliminar:hover {
-  background: #7302b5;
+  background: #ba8b00;
+  color: white;
+}
+
+.btn-registrar {
+  background-color: #2f98d5;
+  color: #ffffff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+}
+.btn-registrar:hover {
+  background: #0067a3;
+  color: white;
+}
+
+.btn-cancelar {
+  background-color: #fcd67d;
+  color: #ffffff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+}
+.btn-cancelar:hover {
+  background: #deb043;
+  color: white;
+}
+
+.btn-actualizar {
+  background-color: #6b9fb9;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+}
+.btn-actualizar:hover {
+  background: #4b9fb9;
+  color: white;
+}
+
+.dataTables_wrapper .btn-imprimir {
+  background-color: #b58fff;
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+  border: none !important;
+}
+
+.dataTables_wrapper .btn-imprimir:hover {
+  background: #8857eb !important;
+  color: white;
+  border: none !important;
+}
+
+.dataTables_wrapper .btn-pdf {
+  background-color: #f44336;
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+}
+.dataTables_wrapper .btn-pdf:hover {
+  background: #c62828;
+  color: white;
+}
+
+.dataTables_wrapper .btn-csv {
+  background-color: #2fcc73;
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+  border: none !important;
+}
+.dataTables_wrapper .btn-csv:hover {
+  background: #00b74f !important;
+  color: white;
+  border: none !important;
+}
+
+.dataTables_wrapper .btn-copiar {
+  background-color: #f44336;
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 4px;
+  transition: 0.4s;
+  margin-right: 10px;
+  border: none !important;
+}
+.dataTables_wrapper .btn-copiar:hover {
+  background: #c62828 !important;
+  color: white;
+  border: none !important;
 }
