@@ -78,8 +78,8 @@ def guardarProveedor(request):
     return redirect('/listaProveedores')
 
 #Eliminar datos de la tabla Proveedores
-def eliminarProveedor(request):
-    proveedorEliminar=Proveedor.objects.get(idProveedor=idProveedor)
+def eliminarProveedor(request, id):
+    proveedorEliminar=Proveedor.objects.get(idProveedor=id)
     proveedorEliminar.delete()
     messages.warning(request, 'Proveedor eliminado correctamente')
     return redirect('/listaProveedores')
@@ -89,7 +89,7 @@ def editarProveedor(request,idProveedor):
     proveedorEditar=Proveedor.objects.get(idProveedor=idProveedor)
     return render(request,'editarProveedor.html',{'proveedor':proveedorEditar})
 
-#Actualizar datos de Proveedores 
+#Actualizar datos de Proveedores
 def actualizacionProveedor(request,idProveedor):
     idProveedor=request.POST["idProveedor"]
     nombre=request.POST['nombre']
@@ -124,8 +124,8 @@ def guardarCatalogo(request):
     return redirect('/listaCatalogos')
 
 #Eliminar datos de la tabla Catalogo
-def eliminarCatalogo(request):
-    catalogoEliminar=Catalogo.objects.get(idCatalogo=idCatalogo)
+def eliminarCatalogo(request, id):
+    catalogoEliminar=Catalogo.objects.get(idCatalogo=id)
     catalogoEliminar.delete()
     messages.warning(request,'Catalogo eliminado correctamente')
     return redirect('/listaCatalogos')
@@ -157,7 +157,7 @@ def listaProductos(request):
     productoBdd=Producto.objects.all()
     proveedorBdd=Proveedor.objects.all()
     catalogoBdd=Catalogo.objects.all()
-    return render(request, 'listaProductos.html', 
+    return render(request, 'listaProductos.html',
     {
         'productos':productoBdd,
         'proveedores':proveedorBdd,
@@ -166,26 +166,31 @@ def listaProductos(request):
 
 #Guardar datos de la tabla Productos
 def guardarProducto(request):
-    idProveedor=request.POST["idProveedor"]
-    proveedorSeleccionado=Proveedor.objects.get(idProveedor=idProveedor)
-    idCatalogo=request.POST["idCatalogo"]
-    catalogoSeleccionado=Catalogo.objects.get(idCatalogo=idCatalogo)
     nombre=request.POST["nombre"]
     precio=request.POST["precio"]
     descripcion=request.POST["descripcion"]
     stock=request.POST["stock"]
     fotografia=request.FILES.get('fotografia')
+
+    catalogo=request.POST["idCatalogo"]
+    catalogoSeleccionado=Catalogo.objects.get(idCatalogo=catalogo)
+
+    proveedor=request.POST["idProveedor"]
+    proveedorSeleccionado=Proveedor.objects.get(idProveedor=proveedor)
+
     nuevoProducto=Producto.objects.create(
-        proveedor=proveedorSeleccionado,
-        catalogo=catalogoSeleccionado,
         nombre=nombre, precio=precio,
         descripcion=descripcion,
-        stock=stock, fotografia=fotografia
+        stock=stock, fotografia=fotografia,
+        catalogo=catalogoSeleccionado,
+        proveedor=proveedorSeleccionado
     )
+    messages.success(request,'Producto guardado correctamente')
+    return redirect('/listaProductos')
 
 #Eliminar datos de la tabla Productos
-def eliminarProducto(request):
-    productoEliminar=Producto.objects.get(idProducto=idProducto)
+def eliminarProducto(request, id):
+    productoEliminar=Producto.objects.get(idProducto=id)
     productoEliminar.delete()
     messages.warning(request,'Producto eliminado correctamente')
     return redirect('/listaProductos')
@@ -195,34 +200,39 @@ def editarProducto(request,idProducto):
     productoEditar=Producto.objects.get(idProducto=idProducto)
     proveedorBdd=Proveedor.objects.all()
     catalogoBdd=Catalogo.objects.all()
-    return render(request, 'editarProducto.html', 
+    return render(request, 'editarProducto.html',
     {
-        'productos':productoBdd,
-        'proveedores':proveedorBdd,
-        'catalogos':catalogoBdd
+        'producto':productoEditar,
+        'proveedor':proveedorBdd,
+        'catalogo':catalogoBdd
     })
 
 #Actualizar datos de Productos
-def actualizacionProductos(request):
-    idProveedor=request.POST["idProveedor"]
-    proveedorSeleccionado=Proveedor.objects.get(idProveedor=idProveedor)
-    idCatalogo=request.POST["idCatalogo"]
-    catalogoSeleccionado=Catalogo.objects.get(idCatalogo=idCatalogo)
+def actualizarProducto(request):
     idProducto=request.POST["idProducto"]
     nombre=request.POST["nombre"]
     precio=request.POST["precio"]
     descripcion=request.POST["descripcion"]
     stock=request.POST["stock"]
     fotografia=request.FILES.get('fotografia')
-    productoEditar=Producto.objects.get(idProducto=idProducto)
-    productoEditar.proveedor=proveedorSeleccionado
-    productoEditar.catalogo=catalogoSeleccionado
-    productoEditar.nombre=nombre
-    productoEditar.precio=precio
-    productoEditar.descripcion=descripcion
-    productoEditar.stock=stock
-    productoEditar.fotografia=fotografia
-    productoEditar.save()
+
+    catalogo=request.POST["idCatalogo"]
+    catalogoSeleccionado=Catalogo.objects.get(idCatalogo=catalogo)
+
+    proveedor=request.POST["idProveedor"]
+    catalogoSeleccionado=Proveedor.objects.get(idProveedor=proveedor)
+
+    productoActualizar=Producto(
+        idProducto=idProducto,
+        nombre=nombre,
+        precio=precio,
+        descripcion=descripcion,
+        stock=stock,
+        fotografia=fotografia,
+        catalogo=catalogoSeleccionado,
+        proveedor=catalogoSeleccionado
+    )
+    productoActualizar.save()
     messages.success(request,'Producto actualizado correctamente')
     return redirect('/listaProductos')
 
