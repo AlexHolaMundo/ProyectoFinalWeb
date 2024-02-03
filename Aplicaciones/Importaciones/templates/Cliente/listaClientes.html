@@ -171,12 +171,28 @@
                   <th class="text-center">
                     <a href="">{{cliente.idCliente}}</a>
                   </th>
-                  <td class="text-center">{{cliente.cedula}}</td>
-                  <td class="text-center">{{cliente.nombre}}</td>
-                  <td class="text-center">{{cliente.direccion}}</td>
-                  <td class="text-primary text-center">{{cliente.email}}</td>
-                  <td class="text-center">{{cliente.telefono}}</td>
-                  <td class="text-center">
+                  <td class="text-center" data-cedula="{{cliente.cedula}}">
+                    {{cliente.cedula}}
+                  </td>
+                  <td class="text-center" data-nombre="{{cliente.nombre}}">
+                    {{cliente.nombre}}
+                  </td>
+                  <td
+                    class="text-center w-25"
+                    data-direccion="{{cliente.direccion}}"
+                  >
+                    {{cliente.direccion}}
+                  </td>
+                  <td
+                    class="text-primary text-center"
+                    data-email="{{cliente.email}}"
+                  >
+                    {{cliente.email}}
+                  </td>
+                  <td class="text-center" data-telefono="{{cliente.telefono}}">
+                    {{cliente.telefono}}
+                  </td>
+                  <td class="text-center w-auto">
                     <a
                       href=""
                       data-toggle="modal"
@@ -186,14 +202,12 @@
                     >
                       <i class="bx bxs-edit btn-editar" title="Editar"></i>
                     </a>
-
                     <a
-                      href="javascript:void(0);"
-                      onclick="eliminarCliente('/eliminarCliente/{{cliente.idCliente}}')"
                       ><i class="bx bxs-trash btn-eliminar" title="Eliminar"></i
                     ></a>
                   </td>
                 </tr>
+
                 {%endfor%}
               </tbody>
             </table>
@@ -227,11 +241,11 @@
       </div>
       <div class="modal-body">
         <form
-          class="row g-3"
+          class="row g-3 modal-form"
           method="POST"
-          action="/guardarCliente/"
+          action="/actualizarCliente/"
           enctype="multipart/form-data"
-          id="formClientes{{cliente.idCliente}}"
+          id="formClientes"
         >
           {% csrf_token %}
           <input
@@ -270,7 +284,8 @@
               name="direccion"
               rows="4"
             >
-{{cliente.direccion}}</textarea
+    {{cliente.direccion}}
+  </textarea
             >
           </div>
           <div class="col-md-6">
@@ -315,18 +330,30 @@
   $(document).ready(function () {
     $('.btn-editar-trigger').click(function () {
       var clienteID = $(this).data('cliente-id')
-      var modalID = '#modalEditar' + clienteID
+      var modalID = '#modalEditar'
 
-      // Obtener los datos del cliente (ajusta según la estructura de tu tabla)
-      var idCliente = $('#idCliente_' + clienteID).text()
-      var cedula = $('#cedula_' + clienteID).text()
-      var nombre = $('#nombre_' + clienteID).text()
-      var direccion = $('#direccion_' + clienteID).text()
-      var email = $('#email_' + clienteID).text()
-      var telefono = $('#telefono_' + clienteID).text()
+      // Obtener los datos del cliente utilizando los atributos data
+      var cedula = $(this).closest('tr').find('[data-cedula]').data('cedula')
+      var nombre = $(this).closest('tr').find('[data-nombre]').data('nombre')
+      var direccion = $(this)
+        .closest('tr')
+        .find('[data-direccion]')
+        .data('direccion')
+      var email = $(this).closest('tr').find('[data-email]').data('email')
+      var telefono = $(this)
+        .closest('tr')
+        .find('[data-telefono]')
+        .data('telefono')
+
+      console.log('Cliente ID:', clienteID)
+      console.log('Cedula:', cedula)
+      console.log('Nombre:', nombre)
+      console.log('Direccion:', direccion)
+      console.log('Email:', email)
+      console.log('Telefono:', telefono)
 
       // Llenar los campos del formulario en el modal
-      $(modalID + ' #idCliente').val(idCliente)
+      $(modalID + ' #idCliente').val(clienteID)
       $(modalID + ' #cedula').val(cedula)
       $(modalID + ' #nombre').val(nombre)
       $(modalID + ' #direccion').val(direccion)

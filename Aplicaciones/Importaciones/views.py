@@ -19,7 +19,7 @@ def guardarCliente(request):
         email=request.POST["email"]
         telefono=request.POST["telefono"]
         nuevoCliente=Cliente.objects.create(cedula=cedula, nombre=nombre, direccion=direccion, email=email, telefono=telefono)
-        messages.success(request, 'Cliete guardado correctamente')
+        messages.success(request, 'Cliente guardado correctamente')
         return redirect('/listaClientes')
 
 #Eliminar cliente
@@ -33,6 +33,27 @@ def eliminarCliente(request, id):
 def editarCliente(request, id):
     clienteEditar=Cliente.objects.get(idCliente=id)
     return render(request, 'Cliente/listaClientes.html', {'clientes':clienteEditar})
+
+#Actualizar cliente
+def actualizarCliente(request):
+    id=request.POST["idCliente"]
+    cedula=request.POST["cedula"]
+    nombre=request.POST["nombre"]
+    direccion=request.POST["direccion"]
+    email=request.POST["email"]
+    telefono=request.POST["telefono"]
+
+    clienteActualizar=Cliente(
+        idCliente=id,
+        cedula=cedula,
+        nombre=nombre,
+        direccion=direccion,
+        email=email,
+        telefono=telefono
+    )
+    clienteActualizar.save()
+    messages.success(request, 'Cliente actualizado correctamente')
+    return redirect('/listaClientes')
 
 #Lsitar datos de la tabla Proveedor
 def listaProveedores(request):

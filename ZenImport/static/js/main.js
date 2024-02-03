@@ -331,6 +331,7 @@
   datatables.forEach((datatable) => {
     new simpleDatatables.DataTable(datatable, {
       perPageSelect: [5, 10, 15, ['All', -1]],
+      perPage: 4,
       columns: [
         {
           select: 2,
