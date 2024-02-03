@@ -15,14 +15,24 @@ def listaClientes(request):
 
 #guardar cliente
 def guardarCliente(request):
-        cedula=request.POST["cedula"]
-        nombre=request.POST["nombre"]
-        direccion=request.POST["direccion"]
-        email=request.POST["email"]
-        telefono=request.POST["telefono"]
-        nuevoCliente=Cliente.objects.create(cedula=cedula, nombre=nombre, direccion=direccion, email=email, telefono=telefono)
-        messages.success(request, 'Cliente guardado correctamente')
-        return redirect('/listaClientes')
+    cedula=request.POST["cedula"]
+    nombre=request.POST["nombre"]
+    direccion=request.POST["direccion"]
+    email=request.POST["email"]
+    telefono=request.POST["telefono"]
+    nuevoCliente=Cliente.objects.create(
+        cedula=cedula,
+        nombre=nombre,
+        direccion=direccion,
+        email=email,
+        telefono=telefono
+    )
+    messages.success(request, 'Cliente guardado correctamente')
+    return redirect('/listaClientes')
+
+def obtener_cantidad_clientes(request):
+    total_clientes = Cliente.objects.count()
+    return JsonResponse({'total_clientes': total_clientes})
 
 #Eliminar cliente
 def eliminarCliente(request, id):

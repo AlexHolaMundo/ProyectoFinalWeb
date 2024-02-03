@@ -11,7 +11,9 @@ urlpatterns = [
     path('eliminarCliente/<int:id>', views.eliminarCliente),
     path('actualizarCliente/', views.actualizarCliente),
     path('obtenerEstadisticasDireccion/', views.estadisticasDireccion, name='obtener_estadisticas_direccion'),
-    
+    # Asumiendo que tienes algo similar en tu archivo urls.py
+    path('obtener_cantidad_clientes/', views.obtener_cantidad_clientes, name='obtener_cantidad_clientes'),
+
     path('listaProveedores/', views.listaProveedores),
     path('listaCatalogos/', views.listaCatalogos),
     path('listaPedidos/', views.listaPedidos),
