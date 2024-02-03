@@ -162,7 +162,7 @@
                   <th scope="col" class="text-center">Direccion</th>
                   <th scope="col" class="text-center">Email</th>
                   <th scope="col" class="text-center">Telefono</th>
-                  <th scope="col" class="text-center w-auto">Acciones</th>
+                  <th scope="col" class="text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,12 +173,23 @@
                   </th>
                   <td class="text-center">{{cliente.cedula}}</td>
                   <td class="text-center">{{cliente.nombre}}</td>
-                  <td class="text-center w-25">{{cliente.direccion}}</td>
+                  <td class="text-center">{{cliente.direccion}}</td>
                   <td class="text-primary text-center">{{cliente.email}}</td>
                   <td class="text-center">{{cliente.telefono}}</td>
-                  <td class="text-center w-auto">
-                    <a><i class="bx bxs-edit btn-editar" title="Editar"></i></a>
+                  <td class="text-center">
                     <a
+                      href=""
+                      data-toggle="modal"
+                      data-target="#modalEditar{{cliente.idCliente}}"
+                      data-cliente-id="{{cliente.idCliente}}"
+                      class="btn-editar-trigger"
+                    >
+                      <i class="bx bxs-edit btn-editar" title="Editar"></i>
+                    </a>
+
+                    <a
+                      href="javascript:void(0);"
+                      onclick="eliminarCliente('/eliminarCliente/{{cliente.idCliente}}')"
                       ><i class="bx bxs-trash btn-eliminar" title="Eliminar"></i
                     ></a>
                   </td>
@@ -194,4 +205,139 @@
   </section>
 </main>
 <!-- End #main -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalEditar{{cliente.idCliente}}"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pagetitle">
+          <h1>Editar Cliente</h1>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="row g-3"
+          method="POST"
+          action="/guardarCliente/"
+          enctype="multipart/form-data"
+          id="formClientes{{cliente.idCliente}}"
+        >
+          {% csrf_token %}
+          <input
+            type="hidden"
+            class="form-control"
+            id="idCliente"
+            name="idCliente"
+            value="{{cliente.idCliente}}"
+          />
+          <div class="col-md-6">
+            <label for="" class="form-label">Cedula</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cedula"
+              name="cedula"
+              value="{{cliente.cedula}}"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+              value="{{cliente.nombre}}"
+            />
+          </div>
+          <div class="col-md-12">
+            <label for="" class="form-label">Direccion</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="direccion"
+              name="direccion"
+              rows="4"
+            >
+{{cliente.direccion}}</textarea
+            >
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              value="{{cliente.email}}"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Telefono</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telefono"
+              name="telefono"
+              value="{{cliente.telefono}}"
+            />
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-registrar">
+              Actualizar <i class="bx bx-refresh"></i>
+            </button>
+            <button
+              type="reset"
+              class="btn btn-cancelar"
+              data-bs-dismiss="modal"
+            >
+              Cancelar <i class="bx bx-message-square-x"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+<script>
+  $(document).ready(function () {
+    $('.btn-editar-trigger').click(function () {
+      var clienteID = $(this).data('cliente-id')
+      var modalID = '#modalEditar' + clienteID
+
+      // Obtener los datos del cliente (ajusta según la estructura de tu tabla)
+      var idCliente = $('#idCliente_' + clienteID).text()
+      var cedula = $('#cedula_' + clienteID).text()
+      var nombre = $('#nombre_' + clienteID).text()
+      var direccion = $('#direccion_' + clienteID).text()
+      var email = $('#email_' + clienteID).text()
+      var telefono = $('#telefono_' + clienteID).text()
+
+      // Llenar los campos del formulario en el modal
+      $(modalID + ' #idCliente').val(idCliente)
+      $(modalID + ' #cedula').val(cedula)
+      $(modalID + ' #nombre').val(nombre)
+      $(modalID + ' #direccion').val(direccion)
+      $(modalID + ' #email').val(email)
+      $(modalID + ' #telefono').val(telefono)
+
+      // Mostrar el modal
+      $(modalID).modal('show')
+      return false
+    })
+  })
+</script>
+
 {%endblock%}
