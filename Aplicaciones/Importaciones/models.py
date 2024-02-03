@@ -11,8 +11,9 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=15)
 
     def __str__(self):
-        fila="{0} => {1} => {2} => {3} => {4} => {5}"
+        fila = '{0} => {1} => {2} => {3} => {4} => {5}'
         return fila.format(self.idCliente, self.cedula, self.nombre, self.direccion, self.email, self.telefono)
+
 #modelo Proveedor
 class Proveedor(models.Model):
     idProveedor=models.AutoField(primary_key=True)
@@ -23,8 +24,9 @@ class Proveedor(models.Model):
     logo=models.FileField(upload_to='proveedores', null=True, blank=True)
 
     def __str__(self):
-        fila='{0} => {1} => {2} => {3} => {4} => {5}'
+        fila = '{0} => {1} => {2} => {3} => {4} => {5}'
         return fila.format(self.idProveedor, self.nombre, self.email, self.pais, self.ciudad, self.logo)
+
 #modelo Catalogo
 class Catalogo(models.Model):
     idCatalogo=models.AutoField(primary_key=True)
@@ -44,8 +46,9 @@ class Pedido(models.Model):
     cliente=models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        fila='{0} => {1} => {2} => {3} => {4}'
-        return fila.format(self.idPedido, self.fechaPedido, self.fechaEntrega, self.observaciones, self.direccionEntrega, self.cliente)
+        fila = '{0} => {1} => {2} => {3} => {4} => {5}'
+        return fila.format(self.idPedido, self.fechaPedido, self.fechaEntrega, self.observaciones, self.direccionEntrega, self.cliente.nombre)
+
 class Producto(models.Model):
     idProducto=models.AutoField(primary_key=True)
     nombre=models.CharField(max_length=50)
@@ -57,8 +60,9 @@ class Producto(models.Model):
     proveedor=models.ForeignKey(Proveedor, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        fila='{0} = {1} = {2} = {3} = {4} = {5} = {6}'
-        return fila.format(self.idProducto, self.nombre, self.precio, self.descripcion,self.stock, self.catalogo, self.proveedor)
+        fila = '{0} = {1} = {2} = {3} = {4} = {5} = {6}'
+        return fila.format(self.idProducto, self.nombre, self.precio, self.descripcion, self.stock, self.catalogo, self.proveedor)
+
 
 class Detalle(models.Model):
     idDetalle=models.AutoField(primary_key=True)

@@ -83,7 +83,7 @@ def estadisticasDireccion(request):
 #Lsitar datos de la tabla Proveedor
 def listaProveedores(request):
     proveedorBdd=Proveedor.objects.all()
-    return render(request, 'listaProveedores.html', {'proveedores':proveedorBdd})
+    return render(request, 'Proveedor/listaProveedores.html', {'proveedores':proveedorBdd})
 
 #Guardar datos de la tabla Proveedores
 def guardarProveedor(request):
@@ -174,8 +174,10 @@ def actualizacionCatalogo(request):
 
 #Listar datos de la tabla Pedido
 def listaPedidos(request):
-    pedidoBdd=Pedido.objects.all()
-    return render(request, 'listaPedidos.html', {'pedidos':pedidoBdd})
+    pedidoBdd = Pedido.objects.all()
+    clienteBdd = Cliente.objects.all()
+    return render(request, 'Pedido/listaPedidos.html', {'pedidos': pedidoBdd, 'clientes': clienteBdd})
+
 
 #Guardar datos de la tabla Pedido
 def guardarPedido(request):
@@ -212,10 +214,10 @@ def eliminarPedido(request, id):
 def editarPedido(request,id):
     pedidoEditar=Pedido.objects.get(idPedido=id)
     clienteBdd=Cliente.objects.all()
-    return render(request, 'editarPedido.html',{'pedido':pedidoEditar, 'clientes':clienteBdd})
+    return render(request, 'listaPedidos.html',{'pedido':pedidoEditar, 'clientes':clienteBdd})
 
 #Actualizar datos de Pedido
-def actualizacionPedido(request):
+def actualizarPedido(request):
     idPedido=request.POST["idPedido"]
     fechaPedido=request.POST["fechaPedido"]
     fechaEntrega=request.POST["fechaEntrega"]
@@ -237,12 +239,21 @@ def actualizacionPedido(request):
     messages.success(request,'Pedido actualizado correctamente')
     return redirect('/listaPedidos')
 
+#Estadisticas de fechas Charts
+def estadisticasFecha(request):
+    try:
+        estadisticas_fecha = Pedido.objects.values('fechaPedido').annotate(registros=models.Count('fechaPedido'))
+        labels = [estadistica['fechaPedido'] for estadistica in estadisticas_fecha]
+        datos = [estadistica['registros'] for estadistica in estadisticas_fecha]
+        return JsonResponse({'labels': labels, 'datos': datos})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 #Listar datos de la tabla Producto
 def listaProductos(request):
     productoBdd=Producto.objects.all()
     proveedorBdd=Proveedor.objects.all()
     catalogoBdd=Catalogo.objects.all()
-    return render(request, 'listaProductos.html',
+    return render(request, 'Producto/listaProductos.html',
     {
         'productos':productoBdd,
         'proveedores':proveedorBdd,

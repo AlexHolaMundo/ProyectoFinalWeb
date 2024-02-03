@@ -1,3 +1,4 @@
+//Contador Clientes
 document.addEventListener('DOMContentLoaded', () => {
   function actualizarNumeroClientes() {
     fetch('/obtener_cantidad_clientes/')
@@ -10,9 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error al obtener la cantidad de clientes:', error)
       })
   }
-
-  // Llama a la función para actualizar el número de clientes al cargar la página
   actualizarNumeroClientes()
+})
 
-  // Puedes llamar a actualizarNumeroClientes() después de guardar un nuevo cliente para actualizar el número en tiempo real.
+//Contador Pedidos
+document.addEventListener('DOMContentLoaded', () => {
+  function actualizarNumeroPedidos() {
+    fetch('/obtener_cantidad_pedidos/')
+      .then((response) => response.json())
+      .then((data) => {
+        const totalPedidosElement = document.getElementById('totalPedidos')
+        totalPedidosElement.innerText = data.total_pedidos
+      })
+      .catch((error) => {
+        console.error('Error al obtener la cantidad de pedidos:', error)
+      })
+  }
+  actualizarNumeroPedidos()
 })

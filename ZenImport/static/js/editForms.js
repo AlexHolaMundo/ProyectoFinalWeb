@@ -27,3 +27,39 @@ $(document).ready(function () {
     return false
   })
 })
+
+//EditarFormulario de Productos
+$(document).ready(function () {
+  $('.btn-editar-trigger').click(function () {
+    var pedidoID = $(this).data('pedido-id')
+    var modalID = '#modalEditarPedido'
+
+    var fechaPedido = $(this)
+      .closest('tr')
+      .find('[data-fechaPedido]')
+      .attr('data-fechaPedido')
+    var fechaEntrega = $(this)
+      .closest('tr')
+      .find('[data-fechaEntrega]')
+      .attr('data-fechaEntrega')
+    var observaciones = $(this)
+      .closest('tr')
+      .find('[data-observaciones]')
+      .text()
+    var direccionEntrega = $(this)
+      .closest('tr')
+      .find('[data-direccionEntrega]')
+      .text()
+    var cliente = $(this).closest('tr').find('[data-cliente]').data('cliente')
+
+    $(modalID + ' #idPedido').val(pedidoID)
+    $(modalID + ' #fechaPedido').val(fechaPedido)
+    $(modalID + ' #fechaEntrega').val(fechaEntrega)
+    $(modalID + ' #observaciones').val(observaciones)
+    $(modalID + ' #direccionEntrega').val(direccionEntrega)
+    $(modalID + ' #idCliente').val(cliente)
+
+    $(modalID).modal('show')
+    return false
+  })
+})
