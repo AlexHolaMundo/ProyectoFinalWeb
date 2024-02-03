@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Proveedor, Catalogo, Pedido, Producto, Detalle
 from django.contrib import messages
+from django.http import JsonResponse
+from django.db import models
 
 # Create your views here.
 def home(request):
@@ -54,6 +56,16 @@ def actualizarCliente(request):
     clienteActualizar.save()
     messages.success(request, 'Cliente actualizado correctamente')
     return redirect('/listaClientes')
+
+def estadisticasDireccion(request):
+    try:
+        estadisticas_direccion = Cliente.objects.values('direccion').annotate(registros=models.Count('direccion'))
+        labels = [estadistica['direccion'] for estadistica in estadisticas_direccion]
+        datos = [estadistica['registros'] for estadistica in estadisticas_direccion]
+        return JsonResponse({'labels': labels, 'datos': datos})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
 
 #Lsitar datos de la tabla Proveedor
 def listaProveedores(request):
