@@ -30,6 +30,7 @@ def guardarCliente(request):
     messages.success(request, 'Cliente guardado correctamente')
     return redirect('/listaClientes')
 
+#Cantidad de clientes para index
 def obtener_cantidad_clientes(request):
     total_clientes = Cliente.objects.count()
     return JsonResponse({'total_clientes': total_clientes})
@@ -67,6 +68,7 @@ def actualizarCliente(request):
     messages.success(request, 'Cliente actualizado correctamente')
     return redirect('/listaClientes')
 
+#Estadisticas de clientes Charts
 def estadisticasDireccion(request):
     try:
         estadisticas_direccion = Cliente.objects.values('direccion').annotate(registros=models.Count('direccion'))
@@ -75,6 +77,7 @@ def estadisticasDireccion(request):
         return JsonResponse({'labels': labels, 'datos': datos})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
 
 
 #Lsitar datos de la tabla Proveedor
@@ -173,6 +176,66 @@ def actualizacionCatalogo(request):
 def listaPedidos(request):
     pedidoBdd=Pedido.objects.all()
     return render(request, 'listaPedidos.html', {'pedidos':pedidoBdd})
+
+#Guardar datos de la tabla Pedido
+def guardarPedido(request):
+    fechaPedido=request.POST["fechaPedido"]
+    fechaEntrega=request.POST["fechaEntrega"]
+    observaciones=request.POST["observaciones"]
+    direccionEntrega=request.POST["direccionEntrega"]
+
+    cliente=request.POST["idCliente"]
+    clienteSeleccionado=Cliente.objects.get(idCliente=cliente)
+    nuevoPedido=Pedido.objects.create(
+        fechaPedido=fechaPedido,
+        fechaEntrega=fechaEntrega,
+        observaciones=observaciones,
+        direccionEntrega=direccionEntrega,
+        cliente=clienteSeleccionado
+    )
+    messages.success(request,'Pedido realizado correctamente')
+    return redirect('/listaPedidos')
+
+#Cantidad de pedidos para index
+def obtener_cantidad_pedidos(request):
+    total_pedidos = Pedido.objects.count()
+    return JsonResponse({'total_pedidos': total_pedidos})
+
+#Eliminar datos de la tabla Pedido
+def eliminarPedido(request, id):
+    pedidoEliminar=Pedido.objects.get(idPedido=id)
+    pedidoEliminar.delete()
+    messages.warning(request,'Pedido eliminado correctamente')
+    return redirect('/listaPedidos')
+
+#Editar datos de la tabla Pedido
+def editarPedido(request,id):
+    pedidoEditar=Pedido.objects.get(idPedido=id)
+    clienteBdd=Cliente.objects.all()
+    return render(request, 'editarPedido.html',{'pedido':pedidoEditar, 'clientes':clienteBdd})
+
+#Actualizar datos de Pedido
+def actualizacionPedido(request):
+    idPedido=request.POST["idPedido"]
+    fechaPedido=request.POST["fechaPedido"]
+    fechaEntrega=request.POST["fechaEntrega"]
+    observaciones=request.POST["observaciones"]
+    direccionEntrega=request.POST["direccionEntrega"]
+
+    cliente=request.POST["idCliente"]
+    clienteSeleccionado=Cliente.objects.get(idCliente=cliente)
+
+    pedidoActualizar=Pedido(
+        idPedido=idPedido,
+        fechaPedido=fechaPedido,
+        fechaEntrega=fechaEntrega,
+        observaciones=observaciones,
+        direccionEntrega=direccionEntrega,
+        cliente=clienteSeleccionado
+    )
+    pedidoActualizar.save()
+    messages.success(request,'Pedido actualizado correctamente')
+    return redirect('/listaPedidos')
 
 #Listar datos de la tabla Producto
 def listaProductos(request):
