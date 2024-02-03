@@ -1,5 +1,5 @@
 // chartScript.js
-
+//chart CLIENTES
 document.addEventListener('DOMContentLoaded', () => {
   let statsVisible = true
 
@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json()
       })
       .then((data) => {
-        const ctx = document.getElementById('barChart').getContext('2d')
+        const ctx = document.getElementById('chartClientes').getContext('2d')
         const datasets = [
           {
-            label: 'Direcciones Más Registradas',
+            label: 'Ocultar estadísticas',
             data: data.datos,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
               'rgba(54, 162, 235, 0.2)',
               'rgba(153, 102, 255, 0.2)',
               'rgba(201, 203, 207, 0.2)',
+              'rgb(300, 102, 350, 0.2)',
             ],
             borderColor: [
               'rgb(255, 99, 132)',
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
               'rgb(54, 162, 235)',
               'rgb(153, 102, 255)',
               'rgb(201, 203, 207)',
+              'rgb(300, 102, 350)',
             ],
             borderWidth: 1,
           },
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (statsVisible) {
           datasets.push({
-            label: 'Anchos de Columnas',
+            label: 'Ampliar',
             data: data.anchos_columnas,
             borderColor: 'rgba(0,0,0,0)',
             borderWidth: 0,
