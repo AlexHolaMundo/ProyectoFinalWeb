@@ -28,7 +28,7 @@
               class="rounded-circle"
             />
             <h2>AlexHolaMundo</h2>
-            <h3>Estudiante UTC</h3>
+            <h3>Software Developer</h3>
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -39,6 +39,31 @@
             </div>
           </div>
         </div>
+        <!-- AdminCard -->
+        <div
+          class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+        >
+          <div class="card info-card customers-card w-75">
+            <a class="card-body" href="/admin">
+              <h5 class="card-title text-center">ADMINISTRAR SITIO</h5>
+              <center>
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  style="background-color: #f6f6fe"
+                >
+                  <i class="bi bi-gear" style="color: #b9c3d8"></i>
+                </div>
+                <div class="ps-3">
+                  <span class="text-dark small pt-1 fw-bold">Desde</span>
+                  <span class="text-secondary small pt-2 ps-1"
+                    >DjangoAdmin</span
+                  >
+                </div>
+              </center>
+            </a>
+          </div>
+        </div>
+        <!-- End AdminCard -->
         <!-- End Perfil -->
       </div>
       <!-- End Left side columns -->
@@ -58,10 +83,14 @@
                   </div>
                   <div class="ps-3">
                     <!-- En tu plantilla HTML -->
-                    <h6 id="totalClientes">{{ total_clientes }}</h6>
+                    <h6 id="totalClientes" class="text-center">
+                      {{ total_clientes }}
+                    </h6>
 
-                    <span class="text-success small pt-1 fw-bold">12%</span>
-                    <span class="text-muted small pt-2 ps-1">increase</span>
+                    <span class="text-primary small pt-1 fw-bold"
+                      >Clientes</span
+                    >
+                    <span class="text-muted small pt-2 ps-1">registrados</span>
                   </div>
                 </div>
               </a>
@@ -84,8 +113,10 @@
                   </div>
                   <div class="ps-3">
                     <h6>$3,264</h6>
-                    <span class="text-success small pt-1 fw-bold">8%</span>
-                    <span class="text-muted small pt-2 ps-1">increase</span>
+                    <span class="text-info small pt-1 fw-bold"
+                      >Proveedores</span
+                    >
+                    <span class="text-muted small pt-2 ps-1">vigentes</span>
                   </div>
                 </div>
               </a>
@@ -107,8 +138,10 @@
                   </div>
                   <div class="ps-3">
                     <h6>1244</h6>
-                    <span class="text-danger small pt-1 fw-bold">12%</span>
-                    <span class="text-muted small pt-2 ps-1">decrease</span>
+                    <span class="text-warning small pt-1 fw-bold"
+                      >Catalogos</span
+                    >
+                    <span class="text-muted small pt-2 ps-1">disponibles</span>
                   </div>
                 </div>
               </a>
@@ -130,8 +163,10 @@
                   </div>
                   <div class="ps-3">
                     <h6>145</h6>
-                    <span class="text-success small pt-1 fw-bold">12%</span>
-                    <span class="text-muted small pt-2 ps-1">increase</span>
+                    <span class="text-secondary small pt-1 fw-bold"
+                      >Pedidos</span
+                    >
+                    <span class="text-muted small pt-2 ps-1">realizados</span>
                   </div>
                 </div>
               </a>
@@ -157,8 +192,10 @@
                   </div>
                   <div class="ps-3">
                     <h6>$3,264</h6>
-                    <span class="text-success small pt-1 fw-bold">8%</span>
-                    <span class="text-muted small pt-2 ps-1">increase</span>
+                    <span class="text-danger small pt-1 fw-bold"
+                      >Productos</span
+                    >
+                    <span class="text-muted small pt-2 ps-1">accesibles</span>
                   </div>
                 </div>
               </a>
@@ -180,30 +217,10 @@
                   </div>
                   <div class="ps-3">
                     <h6>1244</h6>
-                    <span class="text-danger small pt-1 fw-bold">12%</span>
-                    <span class="text-muted small pt-2 ps-1">decrease</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- End Detalle Card -->
-          <!-- Detalle Card -->
-          <div class="col-xxl-4 col-xl-6">
-            <div class="card info-card customers-card">
-              <a class="card-body" href="/admin">
-                <h5 class="card-title">Administrar Sitio</h5>
-                <div class="d-flex align-items-center">
-                  <div
-                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                    style="background-color: #f6f6fe"
-                  >
-                    <i class="bi bi-gear" style="color: #b9c3d8"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>1244</h6>
-                    <span class="text-danger small pt-1 fw-bold">12%</span>
-                    <span class="text-muted small pt-2 ps-1">decrease</span>
+                    <span class="text-success small pt-1 fw-bold"
+                      >Detalles</span
+                    >
+                    <span class="text-muted small pt-2 ps-1">disponibles</span>
                   </div>
                 </div>
               </a>
