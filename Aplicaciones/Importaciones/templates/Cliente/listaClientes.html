@@ -326,45 +326,4 @@
   </div>
 </div>
 <!-- End Modal -->
-<script>
-  $(document).ready(function () {
-    $('.btn-editar-trigger').click(function () {
-      var clienteID = $(this).data('cliente-id')
-      var modalID = '#modalEditar'
-
-      // Obtener los datos del cliente utilizando los atributos data
-      var cedula = $(this).closest('tr').find('[data-cedula]').data('cedula')
-      var nombre = $(this).closest('tr').find('[data-nombre]').data('nombre')
-      var direccion = $(this)
-        .closest('tr')
-        .find('[data-direccion]')
-        .data('direccion')
-      var email = $(this).closest('tr').find('[data-email]').data('email')
-      var telefono = $(this)
-        .closest('tr')
-        .find('[data-telefono]')
-        .data('telefono')
-
-      console.log('Cliente ID:', clienteID)
-      console.log('Cedula:', cedula)
-      console.log('Nombre:', nombre)
-      console.log('Direccion:', direccion)
-      console.log('Email:', email)
-      console.log('Telefono:', telefono)
-
-      // Llenar los campos del formulario en el modal
-      $(modalID + ' #idCliente').val(clienteID)
-      $(modalID + ' #cedula').val(cedula)
-      $(modalID + ' #nombre').val(nombre)
-      $(modalID + ' #direccion').val(direccion)
-      $(modalID + ' #email').val(email)
-      $(modalID + ' #telefono').val(telefono)
-
-      // Mostrar el modal
-      $(modalID).modal('show')
-      return false
-    })
-  })
-</script>
-
 {%endblock%}
