@@ -1366,3 +1366,18 @@ h6 {
   color: white;
   border: none !important;
 }
+
+/*--------------------------------------------------------------
+# Mensajes de validacion
+--------------------------------------------------------------*/
+label.error {
+  color: red;
+  font-size: 12px;
+  font-weight: semibold;
+  padding-left: 5px;
+}
+input.error,
+select.error,
+textarea.error {
+  border: 1px solid red;
+}
