@@ -9,9 +9,15 @@ $(document).ready(function () {
       {
         extend: 'copy',
         text: '<i class="bi bi-copy"></i>',
-        className: 'btn-copiar',
+        className: 'btn-copiar ',
         init: function (api, node, config) {
           $(node).attr('title', 'Copiar al portapapeles')
+        },
+        exportOptions: {
+          columns: ':visible',
+        },
+        customize: function (data) {
+          $(data.body).addClass('copiar-portapapeles')
         },
       },
       {

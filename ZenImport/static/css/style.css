@@ -1353,7 +1353,7 @@ h6 {
 }
 
 .dataTables_wrapper .btn-copiar {
-  background-color: #f44336;
+  background-color: #91ccf4;
   color: #fff;
   padding: 6px 20px;
   border-radius: 4px;
@@ -1362,7 +1362,7 @@ h6 {
   border: none !important;
 }
 .dataTables_wrapper .btn-copiar:hover {
-  background: #c62828 !important;
+  background: #5db3ed !important;
   color: white;
   border: none !important;
 }
@@ -1380,4 +1380,17 @@ input.error,
 select.error,
 textarea.error {
   border: 1px solid red;
+}
+
+/*--------------------------------------------------------------
+# Copiar al portapapeles
+--------------------------------------------------------------*/
+.copiar-portapapeles {
+  background-color: #2fcc73 !important;
+  color: #fff !important;
+  padding: 8px 15px !important;
+  border-radius: 4px !important;
+  transition: 0.4s !important;
+  margin-right: 10px !important;
+  border: none !important;
 }
