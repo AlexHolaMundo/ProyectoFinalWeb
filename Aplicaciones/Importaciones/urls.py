@@ -22,6 +22,11 @@ urlpatterns = [
     path('obtener_cantidad_pedidos/', views.obtener_cantidad_pedidos, name='obtener_cantidad_pedidos'),
     #Rutas Proveedor
     path('listaProveedores/', views.listaProveedores),
+    path('guardarProveedor/', views.guardarProveedor),
+    path('editarProveedor/<idProveedor>', views.editarProveedor),
+    path('eliminarProveedor/<idProveedor>', views.eliminarProveedor),
+    path('actualizacionProveedor/', views.actualizacionProveedor),
+    #Rutas Catalogo
     path('listaCatalogos/', views.listaCatalogos),
     path('listaProductos/', views.listaProductos),
     path('listaDetalles/', views.listaDetalles),
