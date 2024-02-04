@@ -152,3 +152,77 @@ $(document).ready(function () {
     })
   })
 })
+//Validacion de proveedores
+$(document).ready(function () {
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
+    },
+    'Solo se permiten letras en este campo'
+  )
+
+  $('#formProveedores, .modal-proveedorForm').each(function () {
+    $(this).validate({
+      rules: {       
+        nombre: {
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        pais: {
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        ciudad: {
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        logo: {
+          required: true,
+        },
+      },
+      messages: {
+        
+        nombre: {
+          required: 'El nombre es obligatorio',
+          lettersonly: 'Solo se permiten letras en este campo',
+          minlength: 'El nombre debe tener al menos 3 caracteres',
+          maxlength: 'El nombre debe tener menos de 50 caracteres',
+        },
+        email: {
+          required: 'El email es obligatorio',
+          email: 'El email debe ser válido',
+        },
+        pais: {
+          required: 'El pais es obligatoria',
+          lettersonly: 'Solo se permiten letras en este campo',
+          minlength: 'El nombre debe tener al menos 3 caracteres',
+          maxlength: 'El nombre debe tener menos de 50 caracteres',
+        },
+        ciudad: {
+          required: 'La ciudad es obligatoria',
+          lettersonly: 'Solo se permiten letras en este campo',
+          minlength: 'El nombre debe tener al menos 3 caracteres',
+          maxlength: 'El nombre debe tener menos de 50 caracteres',
+        },
+       
+        logo: {
+          required: 'El logo es obligatorios',
+          },
+      },
+      ignore: function (index, element) {
+        return $(element).hasClass('ignore-validation')
+      },
+    })
+  })
+})
