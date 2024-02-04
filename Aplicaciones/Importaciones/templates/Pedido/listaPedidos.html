@@ -51,6 +51,7 @@
                   id="observaciones"
                   name="observaciones"
                   rows="4"
+                  placeholder="Escriba las observaciones del pedido..."
                 ></textarea>
               </div>
               <div class="col-md-6">
@@ -60,6 +61,7 @@
                   class="form-control"
                   id="direccionEntrega"
                   name="direccionEntrega"
+                  placeholder="Escriba la direccion de entrega..."
                 />
               </div>
 
@@ -147,11 +149,12 @@
                     {{pedido.observaciones}}
                   </td>
                   <td
-                    class="text-primary text-center"
+                    class="text-primary text-center green"
                     data-direccionEntrega="{{pedido.direccionEntrega}}"
                   >
                     {{pedido.direccionEntrega}}
                   </td>
+
                   <td
                     class="text-center"
                     data-cliente="{{pedido.cliente.idCliente}}"
@@ -199,7 +202,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="pagetitle">
-          <h1>Editar Cliente</h1>
+          <h1>Editar Pedido</h1>
         </div>
         <button
           type="button"
@@ -208,7 +211,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-pedidoForm modal-body">
         <form
           class="row g-3"
           method="POST"
@@ -252,8 +255,9 @@
               id="observaciones"
               name="observaciones"
               rows="4"
+              placeholder="Escriba las observaciones del pedido..."
             >
-{{pedido.observaciones | striptags}}</textarea
+{{pedido.observaciones}}</textarea
             >
           </div>
           <div class="col-md-6">
@@ -263,7 +267,8 @@
               class="form-control"
               id="direccionEntrega"
               name="direccionEntrega"
-              value="{{pedido.direccionEntrega | striptags}}"
+              value="{{pedido.direccionEntrega}}"
+              placeholder="Escriba la direccion de entrega..."
             />
           </div>
 

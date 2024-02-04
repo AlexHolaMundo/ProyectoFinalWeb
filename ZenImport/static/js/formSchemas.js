@@ -7,7 +7,7 @@ $(document).ready(function () {
     'Solo se permiten letras en este campo'
   )
 
-  $('#formClientes, .modal-body form').each(function () {
+  $('#formClientes, .modal-clienteForm').each(function () {
     $(this).validate({
       rules: {
         idCliente: {
@@ -71,6 +71,79 @@ $(document).ready(function () {
           number: 'El telefono debe ser un número',
           minlength: 'El telefono debe tener al menos 7 dígitos',
           maxlength: 'El telefono debe tener menos de 10 dígitos',
+        },
+      },
+      ignore: function (index, element) {
+        return $(element).hasClass('ignore-validation')
+      },
+    })
+  })
+})
+//EditarFormulario de pedidos
+$(document).ready(function () {
+  $.validator.addMethod(
+    'lettersonly',
+    function (value, element) {
+      return this.optional(element) || /^[a-zA-Z\s]*$/.test(value)
+    },
+    'Solo se permiten letras en este campo'
+  )
+
+  $('#formPedidos, .modal-pedidoFormform').each(function () {
+    $(this).validate({
+      rules: {
+        idPedido: {
+          required: true,
+        },
+        fechaPedido: {
+          required: true,
+          date: true,
+        },
+        fechaEntrega: {
+          required: true,
+          date: true,
+        },
+        observaciones: {
+          required: true,
+          minlength: 3,
+          maxlength: 100,
+        },
+        direccionEntrega: {
+          required: true,
+          minlength: 3,
+          maxlength: 100,
+          lettersonly: true,
+        },
+        idCliente: {
+          required: true,
+        },
+      },
+      messages: {
+        idPedido: {
+          required: 'El id de la carrera es obligatorio',
+        },
+        fechaPedido: {
+          required: 'La fecha de pedido es obligatoria',
+          date: 'La fecha de pedido debe ser válida',
+        },
+        fechaEntrega: {
+          required: 'La fecha de entrega es obligatoria',
+          date: 'La fecha de entrega debe ser válida',
+        },
+        observaciones: {
+          required: 'Las observaciones son obligatorias',
+          minlength: 'Las observaciones deben tener al menos 3 caracteres',
+          maxlength: 'Las observaciones deben tener menos de 100 caracteres',
+        },
+        direccionEntrega: {
+          required: 'La direccion de entrega es obligatoria',
+          minlength: 'La direccion de entrega debe tener al menos 3 caracteres',
+          maxlength:
+            'La direccion de entrega debe tener menos de 100 caracteres',
+          lettersonly: 'Solo se permiten letras en este campo',
+        },
+        idCliente: {
+          required: 'El cliente es obligatorio',
         },
       },
       ignore: function (index, element) {

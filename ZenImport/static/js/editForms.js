@@ -28,11 +28,12 @@ $(document).ready(function () {
   })
 })
 
-//EditarFormulario de Productos
+//EditarFormulario de Pedidos
 $(document).ready(function () {
   $('.btn-editar-trigger').click(function () {
     var pedidoID = $(this).data('pedido-id')
     var modalID = '#modalEditarPedido'
+    var tr = $(this).closest('tr')
 
     var fechaPedido = $(this)
       .closest('tr')
@@ -45,11 +46,9 @@ $(document).ready(function () {
     var observaciones = $(this)
       .closest('tr')
       .find('[data-observaciones]')
-      .text()
-    var direccionEntrega = $(this)
-      .closest('tr')
-      .find('[data-direccionEntrega]')
-      .text()
+      .data('observaciones')
+    var direccionEntrega = tr.find('[data-direccionEntrega]').text().trim()
+
     var cliente = $(this).closest('tr').find('[data-cliente]').data('cliente')
 
     $(modalID + ' #idPedido').val(pedidoID)
