@@ -62,3 +62,26 @@ $(document).ready(function () {
     return false
   })
 })
+//Editar formulario de Proveedores
+$(document).ready(function () {
+  $('.btn-editar-trigger').click(function () {
+    var proveedorID = $(this).data('proveedor-id')
+    var modalID = '#modalEditar'
+
+    var nombre = $(this).closest('tr').find('[data-nombre]').data('nombre')
+    var email = $(this).closest('tr').find('[data-email]').data('email')
+    var pais = $(this).closest('tr').find('[data-pais]').data('pais')
+    var ciudad = $(this).closest('tr').find('[data-ciudad]').data('ciudad')
+    var logo = $(this).closest('tr').find('[data-logo]').data('logo')
+
+    $(modalID + ' #idProveedor').val(proveedorID)
+    $(modalID + ' #nombre').val(nombre)
+    $(modalID + ' #email').val(email)
+    $(modalID + ' #pais').val(pais)
+    $(modalID + ' #ciudad').val(ciudad)
+    $(modalID + ' #logo').val(logo)
+
+    $(modalID).modal('show')
+    return false
+  })
+})
