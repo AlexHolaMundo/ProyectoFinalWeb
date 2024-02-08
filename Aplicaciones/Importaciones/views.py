@@ -276,7 +276,7 @@ def listaProductos(request):
 #Guardar datos de la tabla Productos
 def guardarProducto(request):
     nombre=request.POST["nombre"]
-    precio=request.POST["precio"]
+    precio=Decimal(request.POST["precio"].replace(',', '.'))
     descripcion=request.POST["descripcion"]
     stock=request.POST["stock"]
     fotografia=request.FILES.get('fotografia')
@@ -320,7 +320,7 @@ def editarProducto(request,idProducto):
 def actualizarProducto(request):
     idProducto=request.POST["idProducto"]
     nombre=request.POST["nombre"]
-    precio=request.POST["precio"]
+    precio=Decimal(request.POST["precio"].replace(',', '.'))
     descripcion=request.POST["descripcion"]
     stock=request.POST["stock"]
     fotografia=request.FILES.get('fotografia')
@@ -329,18 +329,17 @@ def actualizarProducto(request):
     catalogoSeleccionado=Catalogo.objects.get(idCatalogo=catalogo)
 
     proveedor=request.POST["idProveedor"]
-    catalogoSeleccionado=Proveedor.objects.get(idProveedor=proveedor)
+    proveedorSeleccionado=Proveedor.objects.get(idProveedor=proveedor)
 
-    productoActualizar=Producto(
-        idProducto=idProducto,
-        nombre=nombre,
-        precio=precio,
-        descripcion=descripcion,
-        stock=stock,
-        fotografia=fotografia,
-        catalogo=catalogoSeleccionado,
-        proveedor=catalogoSeleccionado
-    )
+    productoActualizar=Producto.objects.get(idProducto=idProducto)
+    productoActualizar.nombre=nombre
+    productoActualizar.precio=precio
+    productoActualizar.descripcion=descripcion
+    productoActualizar.stock=stock
+    productoActualizar.fotografia=fotografia
+    productoActualizar.catalogo=catalogoSeleccionado
+    productoActualizar.proveedor=proveedorSeleccionado
+    
     productoActualizar.save()
     messages.success(request,'Producto actualizado correctamente')
     return redirect('/listaProductos')
