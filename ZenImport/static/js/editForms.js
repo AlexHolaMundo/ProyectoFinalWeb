@@ -1,6 +1,6 @@
 //Editar formulario de Clientes
 $(document).ready(function () {
-  $('.btn-editar-trigger').click(function () {
+  $('.btn-editar-trigger-cliente').click(function () {
     var clienteID = $(this).data('cliente-id')
     var modalID = '#modalEditar'
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
 
 //EditarFormulario de Pedidos
 $(document).ready(function () {
-  $('.btn-editar-trigger').click(function () {
+  $('.btn-editar-trigger-pedido').click(function () {
     var pedidoID = $(this).data('pedido-id')
     var modalID = '#modalEditarPedido'
     var tr = $(this).closest('tr')
@@ -64,7 +64,7 @@ $(document).ready(function () {
 })
 //Editar formulario de Proveedores
 $(document).ready(function () {
-  $('.btn-editar-trigger').click(function () {
+  $('.btn-editar-trigger-proveedor').click(function () {
     var proveedorID = $(this).data('proveedor-id')
     var modalID = '#modalEditar'
 
@@ -88,32 +88,27 @@ $(document).ready(function () {
 
 //Editar formulario Detalles
 $(document).ready(function () {
-  $('.btn-editar-trigger').click(function () {
+  $('.btn-editar-trigger-detalle').click(function () {
     var detalleID = $(this).data('detalle-id')
     var modalID = '#modalEditarDetalle'
-    var cantidad = $(this)
-      .closest('tr')
-      .find('[data-cantidad]')
-      .data('cantidad')
-    var precioUnitario = $(this).data('precio-unitario')
-    var descuento = $(this)
-      .closest('tr')
-      .find('[data-descuento]')
-      .data('descuento')
-    var subtotal = $(this)
-      .closest('tr')
-      .find('[data-subtotal]')
-      .data('subtotal')
-    var pedido = $(this).data('pedido')
-    var producto = $(this).data('producto')
+    var tr = $(this).closest('tr')
+    var cantidad = tr.find('[data-cantidad]').data('cantidad')
+    var precioUnitario = tr.find('[data-precioUnitario]').data('preciounitario')
+    var descuento = tr.find('[data-descuento]').data('descuento')
+    var subtotal = tr.find('[data-subtotal]').data('subtotal')
+    var direccionEntrega = tr
+      .find('[data-direccionEntrega]')
+      .data('direccionentrega')
+    var productoNombre = tr.find('[data-productoNombre]').data('productonombre')
 
+    // Asignar los valores al formulario y mostrar el modal
     $(modalID + ' #idDetalle').val(detalleID)
     $(modalID + ' #cantidad').val(cantidad)
     $(modalID + ' #precioUnitario').val(precioUnitario)
     $(modalID + ' #descuento').val(descuento)
     $(modalID + ' #subtotal').val(subtotal)
-    $(modalID + ' #idPedido').val(pedido)
-    $(modalID + ' #idProducto').val(producto)
+    $(modalID + ' #idPedido').val(direccionEntrega)
+    $(modalID + ' #idProducto').val(productoNombre)
 
     $(modalID).modal('show')
     return false

@@ -273,12 +273,15 @@ $(document).ready(function () {
         },
         precioUnitario: {
           required: 'El precio unitario es obligatorio',
+          numberonlyCommaPoint: 'Este campo solo admite números',
         },
         descuento: {
           required: 'El descuento es obligatorio',
+          numberonlyCommaPoint: 'Este campo solo admite números',
         },
         subtotal: {
           required: 'El subtotal es obligatorio',
+          numberonlyCommaPoint: 'Este campo solo admite números',
         },
         idPedido: {
           required: 'El pedido es obligatorio',

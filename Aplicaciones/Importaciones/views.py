@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.db import models
 from django.db.models import Count
+from decimal import Decimal
 
 # Create your views here.
 def home(request):
@@ -215,7 +216,7 @@ def eliminarPedido(request, id):
 def editarPedido(request,id):
     pedidoEditar=Pedido.objects.get(idPedido=id)
     clienteBdd=Cliente.objects.all()
-    return render(request, 'listaPedidos.html',{'pedido':pedidoEditar, 'clientes':clienteBdd})
+    return render(request, 'listaPedidos.html',{'pedidos':pedidoEditar, 'clientes':clienteBdd})
 
 #Actualizar datos de Pedido
 def actualizarPedido(request):
@@ -340,20 +341,20 @@ def listaDetalles(request):
     productoBdd=Producto.objects.all()
     return render(request, 'Detalle/listaDetalles.html', {'detalles':detalleBdd, 'pedidos':pedidoBdd, 'productos':productoBdd})
 
-#Guardar datos de la tabla Detalle
+# Guardar datos de la tabla Detalle
 def guardarDetalle(request):
-    cantidad=request.POST["cantidad"]
-    precioUnitario=request.POST["precioUnitario"]
-    descuento=request.POST["descuento"]
-    subtotal=request.POST["subtotal"]
+    cantidad = Decimal(request.POST["cantidad"].replace(',', '.'))
+    precioUnitario = Decimal(request.POST["precioUnitario"].replace(',', '.'))
+    descuento = Decimal(request.POST["descuento"].replace(',', '.'))
+    subtotal = Decimal(request.POST["subtotal"].replace(',', '.'))
 
-    pedido=request.POST["idPedido"]
-    pedidoSeleccionado=Pedido.objects.get(idPedido=pedido)
+    pedido = request.POST["idPedido"]
+    pedidoSeleccionado = Pedido.objects.get(idPedido=pedido)
 
-    producto=request.POST["idProducto"]
-    productoSeleccionado=Producto.objects.get(idProducto=producto)
+    producto = request.POST["idProducto"]
+    productoSeleccionado = Producto.objects.get(idProducto=producto)
 
-    nuevoDetalle=Detalle.objects.create(
+    nuevoDetalle = Detalle.objects.create(
         cantidad=cantidad,
         precioUnitario=precioUnitario,
         descuento=descuento,
@@ -361,8 +362,9 @@ def guardarDetalle(request):
         pedido=pedidoSeleccionado,
         producto=productoSeleccionado
     )
-    messages.success(request,'Detalle guardado correctamente')
+    messages.success(request, 'Detalle guardado correctamente')
     return redirect('/listaDetalles')
+
 
 #Cantidad de detalles para index
 def obtener_cantidad_detalles(request):
@@ -388,32 +390,37 @@ def editarDetalle(request,idDetalle):
         'productos':productoBdd
     })
 
-#Actualizar datos de Detalle
+
+# Actualizar datos de Detalle
 def actualizarDetalle(request):
-    idDetalle=request.POST["idDetalle"]
-    cantidad=request.POST["cantidad"]
-    precioUnitario=request.POST["precioUnitario"]
-    descuento=request.POST["descuento"]
-    subtotal=request.POST["subtotal"]
+    try:
+        idDetalle = int(request.POST["idDetalle"])
+        cantidad = Decimal(request.POST["cantidad"].replace(',', '.'))
+        precioUnitario = Decimal(request.POST["precioUnitario"].replace(',', '.'))
+        descuento = Decimal(request.POST["descuento"].replace(',', '.'))
+        subtotal = Decimal(request.POST["subtotal"].replace(',', '.'))
 
-    pedido=request.POST["idPedido"]
-    pedidoSeleccionado=Pedido.objects.get(idPedido=pedido)
+        pedido_id = int(request.POST["idPedido"])
+        pedidoSeleccionado = Pedido.objects.get(idPedido=pedido_id)
 
-    producto=request.POST["idProducto"]
-    productoSeleccionado=Producto.objects.get(idProducto=producto)
+        producto_id = int(request.POST["idProducto"])
+        productoSeleccionado = Producto.objects.get(idProducto=producto_id)
 
-    detalleActualizar=Detalle(
-        idDetalle=idDetalle,
-        cantidad=cantidad,
-        precioUnitario=precioUnitario,
-        descuento=descuento,
-        subtotal=subtotal,
-        pedido=pedidoSeleccionado,
-        producto=productoSeleccionado
-    )
-    detalleActualizar.save()
-    messages.success(request,'Detalle actualizado correctamente')
+        detalleActualizar = Detalle.objects.get(idDetalle=idDetalle)
+        detalleActualizar.cantidad = cantidad
+        detalleActualizar.precioUnitario = precioUnitario
+        detalleActualizar.descuento = descuento
+        detalleActualizar.subtotal = subtotal
+        detalleActualizar.pedido = pedidoSeleccionado
+        detalleActualizar.producto = productoSeleccionado
+        detalleActualizar.save()
+
+        messages.success(request, 'Detalle actualizado correctamente')
+    except Exception as e:
+        messages.error(request, f'Error al actualizar el detalle: {e}')
+
     return redirect('/listaDetalles')
+
 
 #Estadisticas de detalles Charts
 def estadisticasProducto(request):

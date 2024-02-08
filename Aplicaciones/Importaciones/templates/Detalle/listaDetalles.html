@@ -169,25 +169,23 @@
                   </td>
                   <td
                     class="text-center text-primary"
-                    data-pedido="{{detalle.pedido.idPedido}}"
+                    data-direccionEntrega="{{detalle.pedido.idPedido}}"
                   >
                     {{detalle.pedido.direccionEntrega}}
                   </td>
-
                   <td
                     class="text-center text-primary green"
-                    data-producto="{{detalle.producto.idProducto}}"
+                    data-productoNombre="{{detalle.producto.idProducto}}"
                   >
                     {{detalle.producto.nombre}}
                   </td>
 
                   <td class="text-center w-auto">
                     <a
-                      href="#"
-                      class="btn-editar-trigger"
-                      data-bs-target="#modalEditarDetalle{{detalle.idDetalle}}"
+                      href=""
+                      data-target="#modalEditarDetalle{{detalle.idDetalle}}"
                       data-detalle-id="{{detalle.idDetalle}}"
-                      data-precio-unitario="{{detalle.precioUnitario}}"
+                      class="btn-editar-trigger-detalle"
                     >
                       <i class="bx bxs-edit btn-editar" title="Editar"></i>
                     </a>
@@ -235,15 +233,22 @@
         <form
           class="row g-3"
           method="POST"
-          action="/guardarDetalle/"
+          action="/actualizarDetalle/"
           enctype="multipart/form-data"
           id="formDetalles"
         >
           {% csrf_token %}
+          <input
+            type="hidden"
+            class="form-control"
+            name="idDetalle"
+            id="idDetalle"
+            value="{{detalle.idDetalle}}"
+          />
           <div class="col-md-3">
             <label for="" class="form-label">Cantidad</label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               id="cantidad"
               name="cantidad"
@@ -285,12 +290,7 @@
 
           <div class="col-md-6">
             <label for="" class="form-label">Direccion de Entrega</label>
-            <select
-              name="idPedido"
-              id="idPedido"
-              required
-              class="form-select selectPedido m-0 p-0"
-            >
+            <select name="idPedido" id="idPedido" required class="form-select">
               <option value="">-- Seleccione una opcion --</option>
               {% for pedido in pedidos %}
               <option value="{{pedido.idPedido}}">
@@ -305,7 +305,7 @@
               name="idProducto"
               id="idProducto"
               required
-              class="form-select selectProducto m-0 p-0"
+              class="form-select"
             >
               <option value="">-- Seleccione una opcion --</option>
               {% for producto in productos %}
@@ -339,6 +339,7 @@
   document.getElementById('idProducto').value =
     '{{detalle.producto.idProducto}}'
 </script>
+
 <!-- End Modal -->
 
 {%endblock%}
