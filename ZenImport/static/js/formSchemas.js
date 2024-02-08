@@ -14,6 +14,32 @@ $.validator.addMethod(
   },
   'Solo puede ingresar números, puntos y comas'
 )
+// validacion para que la fecha no sea pasada
+$.validator.addMethod(
+  'fechaNoPasada',
+  function (value, element) {
+    var now = new Date()
+    // Restar un día a la fecha actual
+    now.setDate(now.getDate() - 1)
+    var selectedDate = new Date(value)
+    return selectedDate >= now
+  },
+  'La fecha de inicio no puede ser una fecha pasada'
+)
+
+//validacion para que la fecha tenga al menos 1 dia de diferencia
+$.validator.addMethod(
+  'fechaNoPasadaEntrega',
+  function (value, element) {
+    var now = new Date()
+    // Restar un día a la fecha actual
+    now.setDate(now.getDate() + 1)
+    var selectedDate = new Date(value)
+    return selectedDate >= now
+  },
+  'La fecha de entrega debe tener al menos 1 dia de diferencia'
+)
+
 $(document).ready(function () {
   $('#formClientes, .modal-clienteForm').each(function () {
     $(this).validate({
@@ -101,10 +127,12 @@ $(document).ready(function () {
         fechaPedido: {
           required: true,
           date: true,
+          fechaNoPasada: true,
         },
         fechaEntrega: {
           required: true,
           date: true,
+          fechaNoPasadaEntrega: true,
         },
         observaciones: {
           required: true,
@@ -128,11 +156,12 @@ $(document).ready(function () {
         },
         fechaPedido: {
           required: 'La fecha de pedido es obligatoria',
-          date: 'La fecha de pedido debe ser válida',
         },
         fechaEntrega: {
           required: 'La fecha de entrega es obligatoria',
           date: 'La fecha de entrega debe ser válida',
+          fechaNoPasadaEntrega:
+            'La fecha de entrega debe tener al menos 1 dia de diferencia ',
         },
         observaciones: {
           required: 'Las observaciones son obligatorias',
