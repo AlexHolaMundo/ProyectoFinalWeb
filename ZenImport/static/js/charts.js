@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateChart()
 })
 
-//chart Pedidos
+//chart Productos
 document.addEventListener('DOMContentLoaded', () => {
   let statsVisible = true
 

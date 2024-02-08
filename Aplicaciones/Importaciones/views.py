@@ -5,7 +5,9 @@ from django.http import JsonResponse
 from django.db import models
 from django.db.models import Count
 from decimal import Decimal
-
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponseRedirect
 # Create your views here.
 def home(request):
     return render(request, 'index.html')
@@ -133,6 +135,15 @@ def actualizacionProveedor(request,idProveedor):
     proveedorEditar.save()
     messages.success(request,'Proveedor actualizado correctamente')
     return redirect('/listaProveedores')
+
+def estadisticasPais(request):
+    try:
+        estadisticas_pais = Proveedor.objects.values('pais').annotate(registros=models.Count('pais'))
+        labels = [estadistica['pais'] for estadistica in estadisticas_pais]
+        datos = [estadistica['registros'] for estadistica in estadisticas_pais]
+        return JsonResponse({'labels': labels, 'datos': datos})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 #Listar datos de la tabla Catalogo
 def listaCatalogos(request):
@@ -431,3 +442,16 @@ def estadisticasProducto(request):
         return JsonResponse({'labels': labels, 'datos': datos})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+#Enviar Correo Electronico a travez de Gmail
+def enviarCorreo(request):
+    if request.method == 'POST':
+        destinatario = request.POST.get('destinatario')
+        asunto = request.POST.get('asunto')
+        mensaje = request.POST.get('mensaje')
+
+        send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [destinatario], fail_silently=False)
+
+        messages.success(request, 'Correo enviado correctamente')
+        return HttpResponseRedirect('/enviarCorreo')
+    return render(request, 'Contacto/correo.html')

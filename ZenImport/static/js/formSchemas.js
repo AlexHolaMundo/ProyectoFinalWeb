@@ -353,7 +353,7 @@ $(document).ready(function () {
           required: true,
           number: true,
         },
-        nombre:{
+        nombre: {
           required: true,
           lettersonly: true,
           minlength: 3,
@@ -387,7 +387,7 @@ $(document).ready(function () {
           required: 'El id del detalle es obligatorio',
           number: 'Este campo solo admite números',
         },
-        nombre:{
+        nombre: {
           required: 'El nombre es obligatorio',
           lettersonly: 'Solo se permiten letras en este campo',
           minlength: 'El nombre debe tener al menos 3 caracteres',
@@ -399,22 +399,80 @@ $(document).ready(function () {
         },
         stock: {
           required: 'el stock es obligatorio',
-          number: 'Este campo solo admite números'
+          number: 'Este campo solo admite números',
         },
         descripcion: {
-          required: "La Descripcion es obligatoria",
+          required: 'La Descripcion es obligatoria',
           minlength: 'El nombre debe tener al menos 3 caracteres',
           maxlength: 'El nombre debe tener menos de 100 caracteres',
         },
         fotografia: {
-          required: "La Fotografia es obligatoria",
+          required: 'La Fotografia es obligatoria',
         },
         idCatalogo: {
           required: 'El catalogo es obligatorio',
         },
         idProveedor: {
           required: 'El proveedor es obligatorio',
-        },        
+        },
+      },
+      ignore: function (index, element) {
+        return $(element).hasClass('ignore-validation')
+      },
+    })
+  })
+})
+
+//Validacion de Producto
+$(document).ready(function () {
+  $('#formContacto').each(function () {
+    $(this).validate({
+      rules: {
+        nombreEmisor: {
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        destinatario: {
+          required: true,
+          email: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        asunto: {
+          required: true,
+          minlength: 3,
+          maxlength: 100,
+        },
+        mensaje: {
+          required: true,
+          minlength: 3,
+          maxlength: 1000,
+        },
+      },
+      messages: {
+        nombreEmisor: {
+          required: 'El nombre es obligatorio',
+          minlength: 'El nombre debe tener al menos 3 caracteres',
+          maxlength: 'El nombre debe tener menos de 50 caracteres',
+        },
+        destinatario: {
+          required: 'El destinatario es obligatorio',
+          email: 'Ingrese un correo electronico valido',
+          minlength: 'El destinatario debe tener al menos 3 caracteres',
+          maxlength: 'El destinatario debe tener menos de 50 caracteres',
+        },
+        asunto: {
+          required: 'El asunto es obligatorio',
+          minlength: 'El asunto debe tener al menos 3 caracteres',
+          maxlength: 'El asunto debe tener menos de 100 caracteres',
+        },
+        mensaje: {
+          required: 'El mensaje es obligatorio',
+          minlength: 'El mensaje debe tener al menos 3 caracteres',
+          maxlength: 'El mensaje debe tener menos de 1000 caracteres',
+        },
       },
       ignore: function (index, element) {
         return $(element).hasClass('ignore-validation')

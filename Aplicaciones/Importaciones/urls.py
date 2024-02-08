@@ -26,6 +26,7 @@ urlpatterns = [
     path('editarProveedor/<idProveedor>', views.editarProveedor),
     path('eliminarProveedor/<idProveedor>', views.eliminarProveedor),
     path('actualizacionProveedor/', views.actualizacionProveedor),
+    path('obtenerEstadisticasPais/', views.estadisticasPais, name='obtener_estadisticas_pais'),
     #Rutas Catalogo
     path('listaCatalogos/', views.listaCatalogos),
     path('guardarCatalogo/', views.guardarCatalogo),
@@ -47,4 +48,6 @@ urlpatterns = [
     path('actualizarDetalle/', views.actualizarDetalle),
     path('obtener_cantidad_detalles/', views.obtener_cantidad_detalles, name='obtener_cantidad_detalles'),
     path('obtenerEstadisticasProducto/', views.estadisticasProducto, name='obtener_estadisticas_producto'),
+    #Ruta Correo Electronico
+    path('enviarCorreo/', views.enviarCorreo),
     ]
