@@ -1,1 +1,197 @@
 {% extends './plantilla.html'%} {%block contenido%} {%load static%} {%endblock%}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Catalogos</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item">Catalogos</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Registro de Catalogos</h5>
+            <!-- Multi Columns Form -->
+            <form
+              class="row g-3"
+              method="POST"
+              action="/guardarCatalogo/"
+              enctype="multipart/form-data"
+              id="formCatalogos"
+            >
+              {% csrf_token %}
+              <div class="col-md-6">
+                <label for="inputName5" class="form-label">Categoria</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="categoria"
+                  name="categoria"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="inputName5" class="form-label">Descripcion</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="descripcion" 
+                    name="descripcion" 
+                />
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-registrar">
+                  Registrar <i class="bx bx-save"></i>
+                </button>
+                <button type="reset" class="btn btn-cancelar">
+                  Cancelar <i class="bx bx-message-square-x"></i>
+                </button>
+              </div>
+            </form>
+            <!-- End Multi Columns Form -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- Recent Ventas -->
+        <div class="col-12">
+          <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+              <h5 class="card-title">Lista de Catalogos</h5>
+              <table
+                class="table table-borderless datatable"
+                id="exportaciones"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">Categoria</th>
+                    <th scope="col" class="text-center">Descripcion</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for catalogo in catalogos%}
+                  <tr>
+                    <th class="text-center">
+                      <a href="">{{catalogo.idCatalogo}}</a>
+                    </th>
+                    <td class="text-center" data-nombre="{{catalogo.categoria}}">
+                      {{catalogo.categoria}}
+                    </td>
+                    <td class="text-center" data-email="{{catalogo.descripcion}}">
+                      {{catalogo.descripcion}}
+                    </td>
+                    
+                    <td class="text-center w-auto">
+                      <a
+                        href=""
+                        data-toggle="modal"
+                        data-target="#modalEditar{{catalogo.idCatalogo}}"
+                        data-catalogo-id="{{catalogo.idCatalogo}}"
+                        class="btn-editar-trigger-catalogo"
+                      >
+                        <i class="bx bxs-edit btn-editar" title="Editar"></i>
+                      </a>
+                      <a
+                        href="javascript:void(0);"
+                        onclick="eliminarCatalogo('/eliminarCatalogo/{{catalogo.idCatalogo}}')"
+                        ><i
+                          class="bx bxs-trash btn-eliminar"
+                          title="Eliminar"
+                        ></i
+                      ></a>
+                    </td>
+                  </tr>
+
+                  {%endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- End Recent Ventas -->
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalEditar{{catalogo.idCatalogo}}"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pagetitle">
+          <h1>Editar Catalogo</h1>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-catalogoForm modal-body">
+        <form
+          class="row g-3 modal-form"
+          method="POST"
+          action="/actualizacionCatalogo/"
+          enctype="multipart/form-data"
+          id="formCatalogos"
+        >
+          {% csrf_token %}
+          <input
+            type="hidden"
+            class="form-control"
+            id="idCatalogo"
+            name="idCatalogo"
+            value="{{catalogo.idCatalogo}}"
+          />
+          <div class="col-md-6">
+            <label for="" class="form-label">Categoria</label>
+            <input
+              type="text"
+              class="form-control"
+              id="categoria"
+              name="categoria"
+              value="{{catalogo.categoria}}"
+            />
+          </div>          
+          <div class="col-md-6">
+            <label for="" class="form-label">Descripcion</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descripcion"
+              name="descripcion"
+              value="{{catalogo.descripcion}}"
+            />
+          </div>
+          
+          <div class="text-center">
+            <button type="submit" class="btn btn-registrar">
+              Actualizar <i class="bx bx-refresh"></i>
+            </button>
+            <button
+              type="reset"
+              class="btn btn-cancelar"
+              data-bs-dismiss="modal"
+            >
+              Cancelar <i class="bx bx-message-square-x"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
