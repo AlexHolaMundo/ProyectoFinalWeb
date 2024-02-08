@@ -15,3 +15,14 @@ $(document).ready(function () {
     placeholder: '-- Seleccione una opción --',
   })
 })
+//selector catalogo y proveedor form detallle
+$(document).ready(function () {
+  $('.selectProveedor').selectize({
+    placeholder: '-- Seleccione una opción --',
+  })
+})
+$(document).ready(function () {
+  $('.selectCatalogo').selectize({
+    placeholder: '-- Seleccione una opción --',
+  })
+})

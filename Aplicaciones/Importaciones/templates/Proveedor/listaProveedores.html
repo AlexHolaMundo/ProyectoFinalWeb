@@ -77,6 +77,15 @@
             </form>
             <!-- End Multi Columns Form -->
           </div>
+        </div>        
+      </div>
+      <!-- ChartJs -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Estadisticas de Proveedores por pais</h5>
+            <canvas id="chartProveedores"></canvas>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -112,13 +121,12 @@
                     <td class="text-center" data-email="{{proveedor.email}}">
                       {{proveedor.email}}
                     </td>
-                    <td class="text-center" data-direccion="{{proveedor.pais}}">
+                    <td class="text-center" data-pais="{{proveedor.pais}}">
                       {{proveedor.pais}}
                     </td>
                     <td
                       class="text-center"
-                      data-direccion="{{proveedor.ciudad}}"
-                    >
+                      data-ciudad="{{proveedor.ciudad}}"              >
                       {{proveedor.ciudad}}
                     </td>
 

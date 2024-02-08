@@ -143,11 +143,11 @@ $(document).ready(function () {
     var precio = tr.find('[data-precio]').data('precio')
     var stock = tr.find('[data-stock]').data('stock')
     var fotografia = tr.find('[data-fotografia]').data('fotografia')
-    var nombreProveedor = tr.find('[data-nombreProveedor]').data('nombreProveedor')
+    var nombreProveedor = tr.find('[data-nombreProveedor]').data('idProveedor')
     var categoria = tr.find('[data-categoria]').data('categoria')
 
     // Asignar los valores al formulario y mostrar el modal
-    $(modalID + ' #idDetalle').val(detalleID)
+    $(modalID + ' #idProducto').val(productoID)
     $(modalID + ' #nombre').val(nombre)
     $(modalID + ' #descripcion').val(descripcion)
     $(modalID + ' #precio').val(precio)

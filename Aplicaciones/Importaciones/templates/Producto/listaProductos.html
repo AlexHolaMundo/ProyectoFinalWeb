@@ -72,7 +72,9 @@
                   accept="image/*"
                 />
               </div>
-              <select
+              <div class="col-md-6">
+                <label for="" class="form-label">Proveedor</label>
+                <select              
                   name="idProveedor"
                   id="idProveedor"
                   required
@@ -115,6 +117,7 @@
           </div>
         </div>
       </div>
+      
 
       <!-- ChartJs -->
       <div class="col-lg-6">
@@ -141,6 +144,7 @@
                   <th scope="col" class="text-center">Stock</th>
                   <th scope="col" class="text-center">Descripcion</th>
                   <th scope="col" class="text-center">Fotografia</th>
+                  <th scope="col" class="text-center">Proveedor</th>
                   <th scope="col" class="text-center">Catalogo</th>
                   <th scope="col" class="text-center">Acciones</th>
                 </tr>
@@ -156,21 +160,18 @@
                   </td>
                   <td
                     class="text-center"
-                    data-precio="{{producto.precio}}"
-                  >
+                    data-precio="{{producto.precio}}">
                     {{producto.precio}}
                   </td>
 
                   <td
                     class="text-center"
-                    data-stock="{{producto.stock}}"
-                  >
+                    data-stock="{{producto.stock}}">
                     {{producto.stock}}
                   </td>
                   <td
                     class="text-center green"
-                    data-descripcion="{{producto.descripcion}}"
-                  >
+                    data-descripcion="{{producto.descripcion}}">
                     {{producto.descripcion}}
                   </td>
                   <td>
@@ -188,8 +189,7 @@
                   </td>
                   <td
                     class="text-center text-primary"
-                    data-nombreProveedor="{{producto.proveedor.idProveedor}}"
-                  >
+                    data-nombreProveedor="{{producto.proveedor.idProveedor}}">
                     {{producto.proveedor.nombre}}
                   </td>
                   <td
@@ -203,7 +203,7 @@
                     <a
                       href=""
                       data-target="#modalEditarProducto{{producto.idProducto}}"
-                      data-detalle-id="{{producto.idProducto}}"
+                      data-producto-id="{{producto.idProducto}}"
                       class="btn-editar-trigger-producto"
                     >
                       <i class="bx bxs-edit btn-editar" title="Editar"></i>
@@ -216,7 +216,6 @@
                     ></a>
                   </td>
                 </tr>
-
                 {%endfor%}
               </tbody>
             </table>
@@ -319,8 +318,13 @@
           </div>
 
           <div class="col-md-6">
-            <label for="" class="form-label">Nombre Proveedor</label>
-            <select name="idProveedor" id="idProveedor" required class="form-select">
+            <label for="" class="form-label">Proveedor</label>
+            <select 
+            name="idProveedor" 
+            id="idProveedor" 
+            required 
+            class="form-select"
+            >
               <option value="">-- Seleccione una opcion --</option>
               {% for proveedor in proveedores %}
               <option value="{{proveedor.idProveedor}}">
