@@ -3,6 +3,7 @@ from .models import Cliente, Proveedor, Catalogo, Pedido, Producto, Detalle
 from django.contrib import messages
 from django.http import JsonResponse
 from django.db import models
+from django.db.models import Count
 
 # Create your views here.
 def home(request):
@@ -335,4 +336,91 @@ def actualizarProducto(request):
 #Listar datos de la tabla Detalle
 def listaDetalles(request):
     detalleBdd=Detalle.objects.all()
-    return render(request, 'listaDetalles.html', {'detalles':detalleBdd})
+    pedidoBdd=Pedido.objects.all()
+    productoBdd=Producto.objects.all()
+    return render(request, 'Detalle/listaDetalles.html', {'detalles':detalleBdd, 'pedidos':pedidoBdd, 'productos':productoBdd})
+
+#Guardar datos de la tabla Detalle
+def guardarDetalle(request):
+    cantidad=request.POST["cantidad"]
+    precioUnitario=request.POST["precioUnitario"]
+    descuento=request.POST["descuento"]
+    subtotal=request.POST["subtotal"]
+
+    pedido=request.POST["idPedido"]
+    pedidoSeleccionado=Pedido.objects.get(idPedido=pedido)
+
+    producto=request.POST["idProducto"]
+    productoSeleccionado=Producto.objects.get(idProducto=producto)
+
+    nuevoDetalle=Detalle.objects.create(
+        cantidad=cantidad,
+        precioUnitario=precioUnitario,
+        descuento=descuento,
+        subtotal=subtotal,
+        pedido=pedidoSeleccionado,
+        producto=productoSeleccionado
+    )
+    messages.success(request,'Detalle guardado correctamente')
+    return redirect('/listaDetalles')
+
+#Cantidad de detalles para index
+def obtener_cantidad_detalles(request):
+    total_detalles = Detalle.objects.count()
+    return JsonResponse({'total_detalles': total_detalles})
+
+#Eliminar datos de la tabla Detalle
+def eliminarDetalle(request, id):
+    detalleEliminar=Detalle.objects.get(idDetalle=id)
+    detalleEliminar.delete()
+    messages.warning(request,'Detalle eliminado correctamente')
+    return redirect('/listaDetalles')
+
+#Editar datos de la tabla Detalle
+def editarDetalle(request,idDetalle):
+    detalleEditar=Detalle.objects.get(idDetalle=idDetalle)
+    pedidoBdd=Pedido.objects.all()
+    productoBdd=Producto.objects.all()
+    return render(request, 'editarDetalle.html',
+    {
+        'detalle':detalleEditar,
+        'pedidos':pedidoBdd,
+        'productos':productoBdd
+    })
+
+#Actualizar datos de Detalle
+def actualizarDetalle(request):
+    idDetalle=request.POST["idDetalle"]
+    cantidad=request.POST["cantidad"]
+    precioUnitario=request.POST["precioUnitario"]
+    descuento=request.POST["descuento"]
+    subtotal=request.POST["subtotal"]
+
+    pedido=request.POST["idPedido"]
+    pedidoSeleccionado=Pedido.objects.get(idPedido=pedido)
+
+    producto=request.POST["idProducto"]
+    productoSeleccionado=Producto.objects.get(idProducto=producto)
+
+    detalleActualizar=Detalle(
+        idDetalle=idDetalle,
+        cantidad=cantidad,
+        precioUnitario=precioUnitario,
+        descuento=descuento,
+        subtotal=subtotal,
+        pedido=pedidoSeleccionado,
+        producto=productoSeleccionado
+    )
+    detalleActualizar.save()
+    messages.success(request,'Detalle actualizado correctamente')
+    return redirect('/listaDetalles')
+
+#Estadisticas de detalles Charts
+def estadisticasProducto(request):
+    try:
+        estadisticas_producto = Detalle.objects.values('producto__nombre').annotate(registros=Count('producto'))
+        labels = [estadistica['producto__nombre'] for estadistica in estadisticas_producto]
+        datos = [estadistica['registros'] for estadistica in estadisticas_producto]
+        return JsonResponse({'labels': labels, 'datos': datos})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

@@ -29,5 +29,12 @@ urlpatterns = [
     #Rutas Catalogo
     path('listaCatalogos/', views.listaCatalogos),
     path('listaProductos/', views.listaProductos),
+    #Rutas Detalle
     path('listaDetalles/', views.listaDetalles),
+    path('guardarDetalle/', views.guardarDetalle),
+    path('editarDetalle/<int:id>', views.editarDetalle),
+    path('eliminarDetalle/<int:id>', views.eliminarDetalle),
+    path('actualizarDetalle/', views.actualizarDetalle),
+    path('obtener_cantidad_detalles/', views.obtener_cantidad_detalles, name='obtener_cantidad_detalles'),
+    path('obtenerEstadisticasProducto/', views.estadisticasProducto, name='obtener_estadisticas_producto'),
     ]

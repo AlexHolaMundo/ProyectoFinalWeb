@@ -85,3 +85,37 @@ $(document).ready(function () {
     return false
   })
 })
+
+//Editar formulario Detalles
+$(document).ready(function () {
+  $('.btn-editar-trigger').click(function () {
+    var detalleID = $(this).data('detalle-id')
+    var modalID = '#modalEditarDetalle'
+    var cantidad = $(this)
+      .closest('tr')
+      .find('[data-cantidad]')
+      .data('cantidad')
+    var precioUnitario = $(this).data('precio-unitario')
+    var descuento = $(this)
+      .closest('tr')
+      .find('[data-descuento]')
+      .data('descuento')
+    var subtotal = $(this)
+      .closest('tr')
+      .find('[data-subtotal]')
+      .data('subtotal')
+    var pedido = $(this).data('pedido')
+    var producto = $(this).data('producto')
+
+    $(modalID + ' #idDetalle').val(detalleID)
+    $(modalID + ' #cantidad').val(cantidad)
+    $(modalID + ' #precioUnitario').val(precioUnitario)
+    $(modalID + ' #descuento').val(descuento)
+    $(modalID + ' #subtotal').val(subtotal)
+    $(modalID + ' #idPedido').val(pedido)
+    $(modalID + ' #idProducto').val(producto)
+
+    $(modalID).modal('show')
+    return false
+  })
+})

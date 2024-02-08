@@ -29,3 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   actualizarNumeroPedidos()
 })
+
+//Contador Detalles
+document.addEventListener('DOMContentLoaded', () => {
+  function actualizarNumeroDetalles() {
+    fetch('/obtener_cantidad_detalles/')
+      .then((response) => response.json())
+      .then((data) => {
+        const totalDetallesElement = document.getElementById('totalDetalles')
+        totalDetallesElement.innerText = data.total_detalles
+      })
+      .catch((error) => {
+        console.error('Error al obtener la cantidad de detalles:', error)
+      })
+  }
+  actualizarNumeroDetalles()
+})

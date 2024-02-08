@@ -1,1 +1,344 @@
-{% extends './plantilla.html'%} {%block contenido%} {%load static%} {%endblock%}
+{% extends '../plantilla.html' %} {%block contenido%} {%load static%}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Detalles</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item">Detalles</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Registro de Detalles</h5>
+            <!-- Multi Columns Form -->
+            <form
+              class="row g-3"
+              method="POST"
+              action="/guardarDetalle/"
+              enctype="multipart/form-data"
+              id="formDetalles"
+            >
+              {% csrf_token %}
+              <div class="col-md-3">
+                <label for="" class="form-label">Cantidad</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="cantidad"
+                  name="cantidad"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="" class="form-label">Precio Unitario</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="precioUnitario"
+                  name="precioUnitario"
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="" class="form-label">Descuento</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="descuento"
+                  name="descuento"
+                  placeholder=""
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="" class="form-label">Subtotal</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="subtotal"
+                  name="subtotal"
+                  placeholder=""
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="" class="form-label">Direccion de entrega</label>
+                <select
+                  name="idPedido"
+                  id="idPedido"
+                  required
+                  class="form-control selectPedido m-0 p-0"
+                >
+                  <option value="">-- Seleccione una opcion --</option>
+                  {% for pedido in pedidos %}
+                  <option value="{{pedido.idPedido}}">
+                    {{pedido.direccionEntrega}}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Producto</label>
+                <select
+                  name="idProducto"
+                  id="idProducto"
+                  required
+                  class="form-control selectProducto m-0 p-0"
+                >
+                  <option value="">-- Seleccione una opcion --</option>
+                  {% for producto in productos %}
+                  <option value="{{producto.idProducto}}">
+                    {{producto.nombre}}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-registrar">
+                  Registrar <i class="bx bx-save"></i>
+                </button>
+                <button type="reset" class="btn btn-cancelar">
+                  Cancelar <i class="bx bx-message-square-x"></i>
+                </button>
+              </div>
+            </form>
+            <!-- End Multi Columns Form -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ChartJs -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Estadisticas de detalles por productos</h5>
+            <canvas id="chartDetalles"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Recent Ventas -->
+      <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+          <div class="card-body">
+            <h5 class="card-title">Lista de Pedidos</h5>
+            <table class="table table-borderless datatable" id="exportaciones">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">ID</th>
+                  <th scope="col" class="text-center">Cantidad</th>
+                  <th scope="col" class="text-center">Precio Unitario</th>
+                  <th scope="col" class="text-center">Descuento</th>
+                  <th scope="col" class="text-center">Subtotal</th>
+                  <th scope="col" class="text-center">Direccion de Entrega</th>
+                  <th scope="col" class="text-center">Producto</th>
+                  <th scope="col" class="text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for detalle in detalles%}
+                <tr>
+                  <th class="text-center">
+                    <a href="">{{detalle.idDetalle}}</a>
+                  </th>
+                  <td class="text-center" data-cantidad="{{detalle.cantidad}}">
+                    {{detalle.cantidad}}
+                  </td>
+                  <td
+                    class="text-center"
+                    data-precioUnitario="{{detalle.precioUnitario}}"
+                  >
+                    {{detalle.precioUnitario}}
+                  </td>
+
+                  <td
+                    class="text-center"
+                    data-descuento="{{detalle.descuento}}"
+                  >
+                    {{detalle.descuento}}
+                  </td>
+                  <td
+                    class="text-center green"
+                    data-subtotal="{{detalle.subtotal}}"
+                  >
+                    {{detalle.subtotal}}
+                  </td>
+                  <td
+                    class="text-center text-primary"
+                    data-pedido="{{detalle.pedido.idPedido}}"
+                  >
+                    {{detalle.pedido.direccionEntrega}}
+                  </td>
+
+                  <td
+                    class="text-center text-primary green"
+                    data-producto="{{detalle.producto.idProducto}}"
+                  >
+                    {{detalle.producto.nombre}}
+                  </td>
+
+                  <td class="text-center w-auto">
+                    <a
+                      href="#"
+                      class="btn-editar-trigger"
+                      data-bs-target="#modalEditarDetalle{{detalle.idDetalle}}"
+                      data-detalle-id="{{detalle.idDetalle}}"
+                      data-precio-unitario="{{detalle.precioUnitario}}"
+                    >
+                      <i class="bx bxs-edit btn-editar" title="Editar"></i>
+                    </a>
+
+                    <a
+                      href="javascript:void(0);"
+                      onclick="eliminarDetalle('/eliminarDetalle/{{detalle.idDetalle}}')"
+                      ><i class="bx bxs-trash btn-eliminar" title="Eliminar"></i
+                    ></a>
+                  </td>
+                </tr>
+
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- End Recent Ventas -->
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalEditarDetalle{{detalle.idDetalle}}"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pagetitle">
+          <h1>Editar Detalle</h1>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-detalleForm modal-body">
+        <form
+          class="row g-3"
+          method="POST"
+          action="/guardarDetalle/"
+          enctype="multipart/form-data"
+          id="formDetalles"
+        >
+          {% csrf_token %}
+          <div class="col-md-3">
+            <label for="" class="form-label">Cantidad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="cantidad"
+              name="cantidad"
+              value="{{detalle.cantidad}}"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="" class="form-label">Precio Unitario</label>
+            <input
+              type="text"
+              class="form-control"
+              id="precioUnitario"
+              name="precioUnitario"
+              value="{{detalle.precioUnitario}}"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="" class="form-label">Descuento</label>
+            <input
+              type="text"
+              class="form-control"
+              id="descuento"
+              name="descuento"
+              value="{{detalle.descuento}}"
+              placeholder=""
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="" class="form-label">Subtotal</label>
+            <input
+              type="text"
+              class="form-control"
+              id="subtotal"
+              name="subtotal"
+              value="{{detalle.subtotal}}"
+              placeholder=""
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="" class="form-label">Direccion de Entrega</label>
+            <select
+              name="idPedido"
+              id="idPedido"
+              required
+              class="form-select selectPedido m-0 p-0"
+            >
+              <option value="">-- Seleccione una opcion --</option>
+              {% for pedido in pedidos %}
+              <option value="{{pedido.idPedido}}">
+                {{pedido.direccionEntrega}}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="" class="form-label">Producto</label>
+            <select
+              name="idProducto"
+              id="idProducto"
+              required
+              class="form-select selectProducto m-0 p-0"
+            >
+              <option value="">-- Seleccione una opcion --</option>
+              {% for producto in productos %}
+              <option value="{{producto.idProducto}}">
+                {{producto.nombre}}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="text-center">
+            <div class="text-center">
+              <button type="submit" class="btn btn-actualizar">
+                Actualizar <i class="bx bx-refresh"></i>
+              </button>
+              <button
+                type="reset"
+                class="btn btn-cancelar"
+                data-bs-dismiss="modal"
+              >
+                Cancelar <i class="bx bx-message-square-x"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById('idPedido').value = '{{detalle.pedido.idPedido}}'
+  document.getElementById('idProducto').value =
+    '{{detalle.producto.idProducto}}'
+</script>
+<!-- End Modal -->
+
+{%endblock%}

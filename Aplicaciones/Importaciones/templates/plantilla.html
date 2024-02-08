@@ -108,6 +108,26 @@
     <!-- Validaciones:js -->
     <script src="{% static 'js/formSchemas.js'%}"></script>
     <script src="{% static 'js/editForms.js'%}"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+      integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="{% static 'js/select.js'%}"></script>
+    <!-- Bootstrap Fileinput JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/js/fileinput.min.js"></script>
+    <!-- español fileinput -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/js/locales/es.min.js"></script>
+
+    <!--Importacion de FileInput-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/css/fileinput.min.css"
+    />
+    <script src="{% static 'js/inputFile.js'%}"></script>
   </head>
 
   <body>
@@ -131,7 +151,7 @@
           <input
             type="text"
             name="query"
-            placeholder="Search"
+            placeholder="Buscar..."
             title="Enter search keyword"
           />
           <button type="submit" title="Search">
@@ -354,6 +374,12 @@
   <script src="{% static 'vendor/tinymce/tinymce.min.js'%}"></script>
   <script src="{% static 'vendor/php-email-form/validate.js'%}"></script>
   <script src="{% static 'js/contador.js'%}"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+    integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
   <!-- Template Main JS File -->
   <script src="{% static 'js/main.js'%}"></script>
 </html>

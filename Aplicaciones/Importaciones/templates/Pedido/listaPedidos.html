@@ -64,23 +64,23 @@
                   placeholder="Escriba la direccion de entrega..."
                 />
               </div>
-
               <div class="col-md-6">
-                <label for="" class="form-label">Cliente</label>
+                <label for="idCliente" class="form-label">Cliente</label>
                 <select
                   name="idCliente"
                   id="idCliente"
                   required
-                  class="form-control"
+                  class="form-select m-0 p-0 selectCliente"
                 >
-                  <option value="">-- Seleccione una opcion --</option>
+                  <option value="">-- Seleccione una opción --</option>
                   {% for cliente in clientes %}
-                  <option value="{{cliente.idCliente}}">
-                    {{cliente.nombre}}
+                  <option value="{{ cliente.idCliente }}">
+                    {{ cliente.nombre }}
                   </option>
                   {% endfor %}
                 </select>
               </div>
+
               <div class="text-center">
                 <button type="submit" class="btn btn-registrar">
                   Registrar <i class="bx bx-save"></i>
@@ -278,17 +278,19 @@
               name="idCliente"
               id="idCliente"
               required
-              class="form-control"
+              class="form-control selectCliente m-0 p-0"
+              placeholder="Seleccione cliente..."
             >
-              <option value="">-- Seleccione una opcion --</option>
+              <option value="">-- Seleccione una opción --</option>
               {% for cliente in clientes %}
               <option value="{{cliente.idCliente}}">{{cliente.nombre}}</option>
               {% endfor %}
             </select>
           </div>
+
           <div class="text-center">
             <div class="text-center">
-              <button type="submit" class="btn btn-registrar">
+              <button type="submit" class="btn btn-actualizar">
                 Actualizar <i class="bx bx-refresh"></i>
               </button>
               <button
