@@ -148,7 +148,7 @@ def estadisticasPais(request):
 #Listar datos de la tabla Catalogo
 def listaCatalogos(request):
     catalogoBdd=Catalogo.objects.all()
-    return render(request, 'listaCatalogos.html', {'catalogos':catalogoBdd})
+    return render(request, 'Catalogo/listaCatalogos.html', {'catalogos':catalogoBdd})
 
 #Guardar datos de la tabla Catalogo
 def guardarCatalogo(request):

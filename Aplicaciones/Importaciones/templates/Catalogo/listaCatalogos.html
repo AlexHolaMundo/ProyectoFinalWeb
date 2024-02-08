@@ -1,4 +1,4 @@
-{% extends './plantilla.html'%} {%block contenido%} {%load static%} 
+{% extends '../plantilla.html'%} {%block contenido%} {%load static%}
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>Catalogos</h1>
@@ -36,11 +36,11 @@
               </div>
               <div class="col-md-6">
                 <label for="inputName5" class="form-label">Descripcion</label>
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="descripcion" 
-                    name="descripcion" 
+                <input
+                  type="text"
+                  class="form-control"
+                  id="descripcion"
+                  name="descripcion"
                 />
               </div>
               <div class="text-center">
@@ -80,13 +80,19 @@
                     <th class="text-center">
                       <a href="">{{catalogo.idCatalogo}}</a>
                     </th>
-                    <td class="text-center" data-categoria="{{catalogo.categoria}}">
+                    <td
+                      class="text-center"
+                      data-categoria="{{catalogo.categoria}}"
+                    >
                       {{catalogo.categoria}}
                     </td>
-                    <td class="text-center" data-descripcion="{{catalogo.descripcion}}">
+                    <td
+                      class="text-center"
+                      data-descripcion="{{catalogo.descripcion}}"
+                    >
                       {{catalogo.descripcion}}
                     </td>
-                    
+
                     <td class="text-center w-auto">
                       <a
                         href=""
@@ -165,7 +171,7 @@
               name="categoria"
               value="{{catalogo.categoria}}"
             />
-          </div>          
+          </div>
           <div class="col-md-6">
             <label for="" class="form-label">Descripcion</label>
             <input
@@ -176,7 +182,7 @@
               value="{{catalogo.descripcion}}"
             />
           </div>
-          
+
           <div class="text-center">
             <button type="submit" class="btn btn-registrar">
               Actualizar <i class="bx bx-refresh"></i>
