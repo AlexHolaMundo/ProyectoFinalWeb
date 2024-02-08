@@ -28,6 +28,11 @@ urlpatterns = [
     path('actualizacionProveedor/', views.actualizacionProveedor),
     #Rutas Catalogo
     path('listaCatalogos/', views.listaCatalogos),
+    path('guardarCatalogo/', views.guardarCatalogo),
+    path('editarCatalogo/<idCatalogo>', views.editarCatalogo),
+    path('eliminarCatalogo/<idCatalogo>', views.eliminarCatalogo),
+    path('actualizacionCatalogo/', views.actualizacionCatalogo),
+    #Rutas Productos
     path('listaProductos/', views.listaProductos),
     #Rutas Detalle
     path('listaDetalles/', views.listaDetalles),
