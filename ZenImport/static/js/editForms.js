@@ -114,3 +114,20 @@ $(document).ready(function () {
     return false
   })
 })
+//Editar formulario de Catalogos
+$(document).ready(function () {
+  $('.btn-editar-trigger-catalogo').click(function () {
+    var catalogoID = $(this).data('catalogo-id')
+    var modalID = '#modalEditar'
+
+    var categoria = $(this).closest('tr').find('[data-categoria]').data('categoria')
+    var descripcion = $(this).closest('tr').find('[data-descripcion]').data('descripcion')
+    
+    $(modalID + ' #idCatalogo').val(catalogoID)
+    $(modalID + ' #categoria').val(categoria)
+    $(modalID + ' #descripcion').val(descripcion)
+
+    $(modalID).modal('show')
+    return false
+  })
+})

@@ -209,17 +209,17 @@ $(document).ready(function () {
         pais: {
           required: 'El pais es obligatoria',
           lettersonly: 'Solo se permiten letras en este campo',
-          minlength: 'El nombre debe tener al menos 3 caracteres',
-          maxlength: 'El nombre debe tener menos de 50 caracteres',
+          minlength: 'El pais debe tener al menos 3 caracteres',
+          maxlength: 'El pais debe tener menos de 50 caracteres',
         },
         ciudad: {
           required: 'La ciudad es obligatoria',
           lettersonly: 'Solo se permiten letras en este campo',
-          minlength: 'El nombre debe tener al menos 3 caracteres',
-          maxlength: 'El nombre debe tener menos de 50 caracteres',
+          minlength: 'La ciudad debe tener al menos 3 caracteres',
+          maxlength: 'La ciudad debe tener menos de 50 caracteres',
         },
         logo: {
-          required: 'El logo es obligatorios',
+          required: 'El logo es obligatorio',
         },
       },
       ignore: function (index, element) {
@@ -228,7 +228,7 @@ $(document).ready(function () {
     })
   })
 })
-//Validacion de proveedores
+//Validacion de detalle
 $(document).ready(function () {
   $('#formDetalles, .modal-detalleForm').each(function () {
     $(this).validate({
@@ -290,6 +290,52 @@ $(document).ready(function () {
         idProducto: {
           required: 'El producto es obligatorio',
           number: 'Este campo solo admite números',
+        },
+      },
+      ignore: function (index, element) {
+        return $(element).hasClass('ignore-validation')
+      },
+    })
+  })
+})
+//Validacion de Catalogo
+$(document).ready(function () {
+  $('#formCatalogos, .modal-catalogoForm').each(function () {
+    $(this).validate({
+      rules: {
+        idCatalogo: {
+          required: true,
+          number: true,
+        },
+        categoria: {
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        descripcion: {
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 100,
+        },
+      },
+      messages: {
+        idCatalogo: {
+          required: 'El id del catalogo es obligatorio',
+          number: 'Este campo solo admite números',
+        },
+        categoria: {
+          required: 'La Categoria es obligatorio',
+          lettersonly: 'Solo se permiten letras en este campo',
+          minlength: 'La Categoria debe tener al menos 3 caracteres',
+          maxlength: 'La Categoria debe tener menos de 50 caracteres',
+        },
+        descripcion: {
+          required: 'La Descripcion es obligatoria',
+          lettersonly: 'Solo se permiten letras en este campo',
+          minlength: 'La Descripcion debe tener al menos 3 caracteres',
+          maxlength: 'La Descripcion debe tener menos de 100 caracteres',
         },
       },
       ignore: function (index, element) {
