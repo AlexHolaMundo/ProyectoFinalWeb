@@ -344,3 +344,81 @@ $(document).ready(function () {
     })
   })
 })
+//Validacion de Producto
+$(document).ready(function () {
+  $('#formProductos, .modal-productoForm').each(function () {
+    $(this).validate({
+      rules: {
+        idProducto: {
+          required: true,
+          number: true,
+        },
+        nombre:{
+          required: true,
+          lettersonly: true,
+          minlength: 3,
+          maxlength: 50,
+        },
+        precio: {
+          numberonlyCommaPoint: true,
+          required: true,
+        },
+        stock: {
+          number: true,
+          required: true,
+        },
+        descripcion: {
+          required: true,
+          minlength: 3,
+          maxlength: 100,
+        },
+        fotografia: {
+          required: true,
+        },
+        idCatalogo: {
+          required: true,
+        },
+        idProveedor: {
+          required: true,
+        },
+      },
+      messages: {
+        idProducto: {
+          required: 'El id del detalle es obligatorio',
+          number: 'Este campo solo admite números',
+        },
+        nombre:{
+          required: 'El nombre es obligatorio',
+          lettersonly: 'Solo se permiten letras en este campo',
+          minlength: 'El nombre debe tener al menos 3 caracteres',
+          maxlength: 'El nombre debe tener menos de 50 caracteres',
+        },
+        precio: {
+          required: 'El precio  es obligatorio',
+          numberonlyCommaPoint: 'Este campo solo admite números',
+        },
+        stock: {
+          required: 'el stock es obligatorio',
+          number: 'Este campo solo admite números'
+        },
+        descripcion: {
+          required: "La Descripcion es obligatoria",
+          minlength: 'El nombre debe tener al menos 3 caracteres',
+          maxlength: 'El nombre debe tener menos de 100 caracteres',
+        },
+        fotografia: {
+          required: "La Fotografia es obligatoria",
+        },
+        idCatalogo: {
+          required: 'El catalogo es obligatorio',
+        },
+        idProveedor: {
+          required: 'El proveedor es obligatorio',
+        },        
+      },
+      ignore: function (index, element) {
+        return $(element).hasClass('ignore-validation')
+      },
+    })
+  })
+})

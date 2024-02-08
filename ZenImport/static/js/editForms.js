@@ -131,3 +131,32 @@ $(document).ready(function () {
     return false
   })
 })
+
+//Editar formulario Productos
+$(document).ready(function () {
+  $('.btn-editar-trigger-producto').click(function () {
+    var productoID = $(this).data('producto-id')
+    var modalID = '#modalEditarProducto'
+    var tr = $(this).closest('tr')
+    var nombre = tr.find('[data-nombre]').data('nombre')
+    var descripcion = tr.find('[data-descripcion]').data('descripcion')
+    var precio = tr.find('[data-precio]').data('precio')
+    var stock = tr.find('[data-stock]').data('stock')
+    var fotografia = tr.find('[data-fotografia]').data('fotografia')
+    var nombreProveedor = tr.find('[data-nombreProveedor]').data('nombreProveedor')
+    var categoria = tr.find('[data-categoria]').data('categoria')
+
+    // Asignar los valores al formulario y mostrar el modal
+    $(modalID + ' #idDetalle').val(detalleID)
+    $(modalID + ' #nombre').val(nombre)
+    $(modalID + ' #descripcion').val(descripcion)
+    $(modalID + ' #precio').val(precio)
+    $(modalID + ' #stock').val(stock)
+    $(modalID + ' #fotografia').val(fotografia)
+    $(modalID + ' #idProveedor').val(nombreProveedor)
+    $(modalID + ' #idCatalogo').val(categoria)
+
+    $(modalID).modal('show')
+    return false
+  })
+})
