@@ -12,7 +12,7 @@ $.validator.addMethod(
   function (value, element) {
     return this.optional(element) || /^[0-9,.]*$/.test(value)
   },
-  'Solo puede ingresar números, puntos y comas'
+  'Solo puede ingresar números'
 )
 // validacion para que la fecha no sea pasada
 $.validator.addMethod(
@@ -269,9 +269,14 @@ $(document).ready(function () {
         cantidad: {
           number: true,
           required: true,
+          minlength: 1,
+          maxlength: 2,
+          numberonlyCommaPoint: true,
         },
         precioUnitario: {
           numberonlyCommaPoint: true,
+          minlength: 1,
+          maxlength: 6,
           required: true,
         },
         descuento: {
@@ -299,9 +304,13 @@ $(document).ready(function () {
         cantidad: {
           required: 'La cantidad es obligatoria',
           number: 'Este campo solo admite números',
+          minlength: 'La cantidad debe tener al menos 1 dígito',
+          maxlength: 'La cantidad debe tener menos de 4 dígitos',
         },
         precioUnitario: {
           required: 'El precio unitario es obligatorio',
+          minlength: 'El precio unitario debe tener al menos 1 dígito',
+          maxlength: 'El precio unitario debe tener menos de 5 dígitos',
           numberonlyCommaPoint: 'Este campo solo admite números',
         },
         descuento: {
