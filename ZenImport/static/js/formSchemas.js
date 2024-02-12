@@ -10,10 +10,11 @@ $.validator.addMethod(
 $.validator.addMethod(
   'numberonlyCommaPoint',
   function (value, element) {
-    return this.optional(element) || /^[0-9,.]*$/.test(value)
+    // Verificar si el valor es un número con hasta dos decimales y no excede 1000
+    return /^\d{1,4}(\.\d{1,2})?$/.test(value) && parseFloat(value) <= 1000;
   },
-  'Solo puede ingresar números'
-)
+  'Por favor, introduce un precio válido menor o igual a 1000.'
+);
 // validacion para que la fecha no sea pasada
 $.validator.addMethod(
   'fechaNoPasada',
@@ -275,8 +276,6 @@ $(document).ready(function () {
         },
         precioUnitario: {
           numberonlyCommaPoint: true,
-          minlength: 1,
-          maxlength: 6,
           required: true,
         },
         descuento: {
@@ -309,9 +308,7 @@ $(document).ready(function () {
         },
         precioUnitario: {
           required: 'El precio unitario es obligatorio',
-          minlength: 'El precio unitario debe tener al menos 1 dígito',
-          maxlength: 'El precio unitario debe tener menos de 5 dígitos',
-          numberonlyCommaPoint: 'Este campo solo admite números',
+          numberonlyCommaPoint: 'Introduzca un precio valido que no exceda de 1000',
         },
         descuento: {
           required: 'El descuento es obligatorio',
@@ -404,6 +401,8 @@ $(document).ready(function () {
         stock: {
           number: true,
           required: true,
+          minlength: 1,
+          maxlength: 2,
         },
         descripcion: {
           required: true,
@@ -433,11 +432,13 @@ $(document).ready(function () {
         },
         precio: {
           required: 'El precio  es obligatorio',
-          numberonlyCommaPoint: 'Este campo solo admite números',
+          numberonlyCommaPoint: 'Introduzca un precio valido que no exceda de 1000',
         },
         stock: {
           required: 'el stock es obligatorio',
           number: 'Este campo solo admite números',
+          minlength: 'La cantidad debe tener al menos 1 dígito',
+          maxlength: 'La cantidad debe tener menos de 4 dígitos',
         },
         descripcion: {
           required: 'La Descripcion es obligatoria',

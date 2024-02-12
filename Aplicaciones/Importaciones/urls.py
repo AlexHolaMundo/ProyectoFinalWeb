@@ -29,18 +29,24 @@ urlpatterns = [
     path('eliminarProveedor/<idProveedor>', views.eliminarProveedor),
     path('actualizacionProveedor/', views.actualizacionProveedor),
     path('obtenerEstadisticasPais/', views.estadisticasPais, name='obtener_estadisticas_pais'),
+    path('obtener_cantidad_proveedores/', views.obtener_cantidad_proveedores, name='obtener_cantidad_proveedores'),
+       
     #Rutas Catalogo
     path('listaCatalogos/', views.listaCatalogos),
     path('guardarCatalogo/', views.guardarCatalogo),
     path('editarCatalogo/<idCatalogo>', views.editarCatalogo),
     path('eliminarCatalogo/<idCatalogo>', views.eliminarCatalogo),
     path('actualizacionCatalogo/', views.actualizacionCatalogo),
+    path('obtener_cantidad_catalogos/', views.obtener_cantidad_Catalogos, name='obtener_cantidad_catalogos'),
+    
     #Rutas Productos
     path('listaProductos/', views.listaProductos),
     path('guardarProducto/', views.guardarProducto),
     path('editarProducto/<idProducto>', views.editarProducto),
     path('eliminarProducto/<idProducto>', views.eliminarProducto),
     path('actualizarProducto/', views.actualizarProducto),
+    path('obtenerEstadisticaProducto/', views.estadisticaProducto, name='obtener_estadistica_producto'),
+    path('obtener_cantidad_productos/', views.obtener_cantidad_Productos, name='obtener_cantidad_productos'),
     
     #Rutas Detalle
     path('listaDetalles/', views.listaDetalles),

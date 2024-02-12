@@ -89,6 +89,11 @@ def listaProveedores(request):
     proveedorBdd=Proveedor.objects.all()
     return render(request, 'Proveedor/listaProveedores.html', {'proveedores':proveedorBdd})
 
+#Cantidad de provedores para index
+def obtener_cantidad_proveedores(request):
+    total_proveedores = Proveedor.objects.count()
+    return JsonResponse({'total_proveedores': total_proveedores})
+
 #Guardar datos de la tabla Proveedores
 def guardarProveedor(request):
     nombre=request.POST['nombre']
@@ -160,6 +165,11 @@ def guardarCatalogo(request):
     )
     messages.success(request, "Catalogo guardado correctamente")
     return redirect('/listaCatalogos')
+
+#Cantidad de Catalogo para index
+def obtener_cantidad_Catalogos(request):
+    total_catalogos = Catalogo.objects.count()
+    return JsonResponse({'total_catalogos': total_catalogos})
 
 #Eliminar datos de la tabla Catalogo
 def eliminarCatalogo(request, id):
@@ -273,6 +283,10 @@ def listaProductos(request):
         'catalogos':catalogoBdd
     })
 
+#Cantidad de productos para index
+def obtener_cantidad_Productos(request):
+    total_productos = Producto.objects.count()
+    return JsonResponse({'total_productos': total_productos})
 #Guardar datos de la tabla Productos
 def guardarProducto(request):
     nombre=request.POST["nombre"]
@@ -343,6 +357,15 @@ def actualizarProducto(request):
     productoActualizar.save()
     messages.success(request,'Producto actualizado correctamente')
     return redirect('/listaProductos')
+
+def estadisticaProducto(request):
+    try:
+        estadistica_producto = Producto.objects.values('precio').annotate(registros=models.Count('precio'))
+        labels = [estadistica['precio'] for estadistica in estadistica_producto]
+        datos = [estadistica['registros'] for estadistica in estadistica_producto]
+        return JsonResponse({'labels': labels, 'datos': datos})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 #Listar datos de la tabla Detalle
 def listaDetalles(request):
