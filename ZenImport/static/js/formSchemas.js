@@ -346,9 +346,8 @@ $(document).ready(function () {
         },
         descripcion: {
           required: true,
-          lettersonly: true,
           minlength: 3,
-          maxlength: 100,
+          maxlength: 200,
         },
       },
       messages: {
@@ -364,9 +363,8 @@ $(document).ready(function () {
         },
         descripcion: {
           required: 'La Descripcion es obligatoria',
-          lettersonly: 'Solo se permiten letras en este campo',
           minlength: 'La Descripcion debe tener al menos 3 caracteres',
-          maxlength: 'La Descripcion debe tener menos de 100 caracteres',
+          maxlength: 'La Descripcion debe tener menos de 200 caracteres',
         },
       },
       ignore: function (index, element) {
