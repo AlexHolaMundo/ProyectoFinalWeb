@@ -61,6 +61,8 @@ urlpatterns = [
 
     #Ruta Correo Electronico
     path('enviarCorreo/', views.enviarCorreo),
+    path('buscarClientes/', views.buscarClientes, name='buscar_clientes'),
+
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

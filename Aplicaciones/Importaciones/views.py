@@ -8,6 +8,7 @@ from decimal import Decimal
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 # Create your views here.
 def home(request):
     return render(request, 'index.html')
@@ -482,3 +483,12 @@ def enviarCorreo(request):
         messages.success(request, 'Correo enviado correctamente')
         return HttpResponseRedirect('/enviarCorreo')
     return render(request, 'Contacto/correo.html')
+
+
+def buscarClientes(request):
+    query = request.GET.get('query')
+    if query:
+        clientes = Cliente.objects.filter(Q(nombre__icontains=query))
+    else:
+        clientes = Cliente.objects.all()
+    return render(request, 'Cliente/listaClientes.html', {'clientes': clientes})
