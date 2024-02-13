@@ -335,7 +335,7 @@ def editarProducto(request,idProducto):
 
 #Actualizar datos de Productos
 def actualizarProducto(request):
-    idProducto=request.POST["idProducto"]
+    id=request.POST["idProducto"]
     nombre=request.POST["nombre"]
     precio=Decimal(request.POST["precio"].replace(',', '.'))
     descripcion=request.POST["descripcion"]
@@ -348,16 +348,18 @@ def actualizarProducto(request):
     proveedor=request.POST["idProveedor"]
     proveedorSeleccionado=Proveedor.objects.get(idProveedor=proveedor)
 
-    productoActualizar=Producto.objects.get(idProducto=idProducto)
+    productoActualizar=Producto.objects.get(idProducto=id)
     productoActualizar.nombre=nombre
     productoActualizar.precio=precio
     productoActualizar.descripcion=descripcion
     productoActualizar.stock=stock
-    productoActualizar.fotografia=fotografia
     productoActualizar.catalogo=catalogoSeleccionado
     productoActualizar.proveedor=proveedorSeleccionado
-    
+
+    if fotografia:
+        productoActualizar.fotografia=fotografia
     productoActualizar.save()
+
     messages.success(request,'Producto actualizado correctamente')
     return redirect('/listaProductos')
 

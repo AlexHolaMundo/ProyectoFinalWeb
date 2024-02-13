@@ -41,6 +41,7 @@ $.validator.addMethod(
   'La fecha de entrega debe tener al menos 1 dia de diferencia'
 )
 
+//Validacion de clientes
 $(document).ready(function () {
   $('#formClientes, .modal-clienteForm').each(function () {
     $(this).validate({
@@ -116,7 +117,7 @@ $(document).ready(function () {
     })
   })
 })
-//EditarFormulario de pedidos
+//Validacion de pedidos
 $(document).ready(function () {
   $('#formPedidos, .modal-pedidoFormform').each(function () {
     $(this).validate({
@@ -404,9 +405,6 @@ $(document).ready(function () {
           minlength: 3,
           maxlength: 100,
         },
-        fotografia: {
-          required: true,
-        },
         idCatalogo: {
           required: true,
         },
@@ -440,9 +438,6 @@ $(document).ready(function () {
           required: 'La Descripcion es obligatoria',
           minlength: 'El nombre debe tener al menos 3 caracteres',
           maxlength: 'El nombre debe tener menos de 100 caracteres',
-        },
-        fotografia: {
-          required: 'La Fotografia es obligatoria',
         },
         idCatalogo: {
           required: 'El catalogo es obligatorio',

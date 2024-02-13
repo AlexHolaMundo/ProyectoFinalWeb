@@ -74,7 +74,7 @@
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Proveedor</label>
-                <select              
+                <select
                   name="idProveedor"
                   id="idProveedor"
                   required
@@ -117,7 +117,6 @@
           </div>
         </div>
       </div>
-      
 
       <!-- ChartJs -->
       <div class="col-lg-6">
@@ -140,7 +139,7 @@
                 <tr>
                   <th scope="col" class="text-center">ID</th>
                   <th scope="col" class="text-center">Nombre</th>
-                  <th scope="col" class="text-center">Precio </th>
+                  <th scope="col" class="text-center">Precio</th>
                   <th scope="col" class="text-center">Stock</th>
                   <th scope="col" class="text-center">Descripcion</th>
                   <th scope="col" class="text-center">Fotografia</th>
@@ -158,20 +157,17 @@
                   <td class="text-center" data-nombre="{{producto.nombre}}">
                     {{producto.nombre}}
                   </td>
-                  <td
-                    class="text-center"
-                    data-precio="{{producto.precio}}">
+                  <td class="text-center" data-precio="{{producto.precio}}">
                     {{producto.precio}}
                   </td>
 
-                  <td
-                    class="text-center"
-                    data-stock="{{producto.stock}}">
+                  <td class="text-center" data-stock="{{producto.stock}}">
                     {{producto.stock}}
                   </td>
                   <td
                     class="text-center green"
-                    data-descripcion="{{producto.descripcion}}">
+                    data-descripcion="{{producto.descripcion}}"
+                  >
                     {{producto.descripcion}}
                   </td>
                   <td>
@@ -189,7 +185,8 @@
                   </td>
                   <td
                     class="text-center text-primary"
-                    data-nombreProveedor="{{producto.proveedor.idProveedor}}">
+                    data-nombreProveedor="{{producto.proveedor.idProveedor}}"
+                  >
                     {{producto.proveedor.nombre}}
                   </td>
                   <td
@@ -306,24 +303,35 @@
             />
           </div>
           <div class="col-md-6">
-            <label for="" class="form-label">Fotografia</label>
+            <label for="" class="form-label"
+              >Actualizar Fotografia (Opcional)</label
+            >
+            {%if producto.fotografia%}
             <input
               type="file"
               class="form-control"
               id="fotografia"
               name="fotografia"
               accept="image/*"
-              value="{{proveedor.fotografia}}"
             />
+            {%else%}
+            <input
+              type="file"
+              class="form-control"
+              id="fotografia"
+              name="fotografia"
+              accept="image/*"
+            />
+            {%endif%}
           </div>
 
           <div class="col-md-6">
             <label for="" class="form-label">Proveedor</label>
-            <select 
-            name="idProveedor" 
-            id="idProveedor" 
-            required 
-            class="form-select"
+            <select
+              name="idProveedor"
+              id="idProveedor"
+              required
+              class="form-select"
             >
               <option value="">-- Seleccione una opcion --</option>
               {% for proveedor in proveedores %}
@@ -369,8 +377,10 @@
   </div>
 </div>
 <script>
-  document.getElementById('idProveedor').value = '{{producto.proveedor.idProveedor}}'
-  document.getElementById('idCatalogo').value ='{{producto.catalogo.idCatalogo}}'
+  document.getElementById('idProveedor').value =
+    '{{producto.proveedor.idProveedor}}'
+  document.getElementById('idCatalogo').value =
+    '{{producto.catalogo.idCatalogo}}'
 </script>
 
 <!-- End Modal -->
