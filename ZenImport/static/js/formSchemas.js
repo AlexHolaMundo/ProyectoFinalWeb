@@ -145,7 +145,6 @@ $(document).ready(function () {
           required: true,
           minlength: 3,
           maxlength: 100,
-          lettersonly: true,
         },
         idCliente: {
           required: true,
@@ -175,7 +174,6 @@ $(document).ready(function () {
           minlength: 'La direccion de entrega debe tener al menos 3 caracteres',
           maxlength:
             'La direccion de entrega debe tener menos de 100 caracteres',
-          lettersonly: 'Solo se permiten letras en este campo',
         },
         idCliente: {
           required: 'El cliente es obligatorio',
@@ -265,21 +263,27 @@ $(document).ready(function () {
         cantidad: {
           number: true,
           required: true,
+          min: 0.01,
           minlength: 1,
-          maxlength: 2,
-          numberonlyCommaPoint: true,
+          maxlength: 3,
         },
         precioUnitario: {
           numberonlyCommaPoint: true,
+          min: 0.01,
           required: true,
+          minlength: 1,
+          maxlength: 3,
         },
         descuento: {
           numberonlyCommaPoint: true,
-          required: true,
+          maxlength: 3,
         },
         subtotal: {
           numberonlyCommaPoint: true,
           required: true,
+          min: 0.01,
+          minlength: 1,
+          maxlength: 3,
         },
         idPedido: {
           required: true,
@@ -298,21 +302,24 @@ $(document).ready(function () {
         cantidad: {
           required: 'La cantidad es obligatoria',
           number: 'Este campo solo admite números',
+          min: 'La cantidad debe ser mayor a 0',
           minlength: 'La cantidad debe tener al menos 1 dígito',
           maxlength: 'La cantidad debe tener menos de 4 dígitos',
         },
         precioUnitario: {
           required: 'El precio unitario es obligatorio',
-          numberonlyCommaPoint:
-            'Introduzca un precio valido que no exceda de 1000',
+          minlength: 'El precio unitario debe tener al menos 1 dígito',
+          maxlength: 'El precio unitario debe tener menos de 4 dígitos',
+          min: 'El precio unitario debe ser mayor a 0',
         },
         descuento: {
-          required: 'El descuento es obligatorio',
-          numberonlyCommaPoint: 'Este campo solo admite números',
+          maxlength: 'El descuento debe tener menos de 4 dígitos',
         },
         subtotal: {
           required: 'El subtotal es obligatorio',
-          numberonlyCommaPoint: 'Este campo solo admite números',
+          min: 'El subtotal debe ser mayor a 0',
+          minlength: 'El subtotal debe tener al menos 1 dígito',
+          maxlength: 'El subtotal debe tener menos de 4 dígitos',
         },
         idPedido: {
           required: 'El pedido es obligatorio',
@@ -320,7 +327,6 @@ $(document).ready(function () {
         },
         idProducto: {
           required: 'El producto es obligatorio',
-          number: 'Este campo solo admite números',
         },
       },
       ignore: function (index, element) {
@@ -384,7 +390,6 @@ $(document).ready(function () {
         },
         nombre: {
           required: true,
-          lettersonly: true,
           minlength: 3,
           maxlength: 50,
         },
@@ -417,7 +422,6 @@ $(document).ready(function () {
         },
         nombre: {
           required: 'El nombre es obligatorio',
-          lettersonly: 'Solo se permiten letras en este campo',
           minlength: 'El nombre debe tener al menos 3 caracteres',
           maxlength: 'El nombre debe tener menos de 50 caracteres',
         },
