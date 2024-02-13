@@ -11,10 +11,10 @@ $.validator.addMethod(
   'numberonlyCommaPoint',
   function (value, element) {
     // Verificar si el valor es un número con hasta dos decimales y no excede 1000
-    return /^\d{1,4}(\.\d{1,2})?$/.test(value) && parseFloat(value) <= 1000;
+    return /^\d{1,4}(\.\d{1,2})?$/.test(value) && parseFloat(value) <= 1000
   },
   'Por favor, introduce un precio válido menor o igual a 1000.'
-);
+)
 // validacion para que la fecha no sea pasada
 $.validator.addMethod(
   'fechaNoPasada',
@@ -217,9 +217,6 @@ $(document).ready(function () {
           minlength: 3,
           maxlength: 50,
         },
-        logo: {
-          required: true,
-        },
       },
       messages: {
         idProveedor: {
@@ -247,9 +244,6 @@ $(document).ready(function () {
           lettersonly: 'Solo se permiten letras en este campo',
           minlength: 'La ciudad debe tener al menos 3 caracteres',
           maxlength: 'La ciudad debe tener menos de 50 caracteres',
-        },
-        logo: {
-          required: 'El logo es obligatorio',
         },
       },
       ignore: function (index, element) {
@@ -308,7 +302,8 @@ $(document).ready(function () {
         },
         precioUnitario: {
           required: 'El precio unitario es obligatorio',
-          numberonlyCommaPoint: 'Introduzca un precio valido que no exceda de 1000',
+          numberonlyCommaPoint:
+            'Introduzca un precio valido que no exceda de 1000',
         },
         descuento: {
           required: 'El descuento es obligatorio',
@@ -432,7 +427,8 @@ $(document).ready(function () {
         },
         precio: {
           required: 'El precio  es obligatorio',
-          numberonlyCommaPoint: 'Introduzca un precio valido que no exceda de 1000',
+          numberonlyCommaPoint:
+            'Introduzca un precio valido que no exceda de 1000',
         },
         stock: {
           required: 'el stock es obligatorio',

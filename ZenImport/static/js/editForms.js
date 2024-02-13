@@ -66,20 +66,18 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.btn-editar-trigger-proveedor').click(function () {
     var proveedorID = $(this).data('proveedor-id')
-    var modalID = '#modalEditar'
+    var modalID = '#modalEditarProveedor'
 
     var nombre = $(this).closest('tr').find('[data-nombre]').data('nombre')
     var email = $(this).closest('tr').find('[data-email]').data('email')
     var pais = $(this).closest('tr').find('[data-pais]').data('pais')
     var ciudad = $(this).closest('tr').find('[data-ciudad]').data('ciudad')
-    var logo = $(this).closest('tr').find('[data-logo]').data('logo')
 
     $(modalID + ' #idProveedor').val(proveedorID)
     $(modalID + ' #nombre').val(nombre)
     $(modalID + ' #email').val(email)
     $(modalID + ' #pais').val(pais)
     $(modalID + ' #ciudad').val(ciudad)
-    $(modalID + ' #logo').val(logo)
 
     $(modalID).modal('show')
     return false
@@ -120,9 +118,15 @@ $(document).ready(function () {
     var catalogoID = $(this).data('catalogo-id')
     var modalID = '#modalEditar'
 
-    var categoria = $(this).closest('tr').find('[data-categoria]').data('categoria')
-    var descripcion = $(this).closest('tr').find('[data-descripcion]').data('descripcion')
-    
+    var categoria = $(this)
+      .closest('tr')
+      .find('[data-categoria]')
+      .data('categoria')
+    var descripcion = $(this)
+      .closest('tr')
+      .find('[data-descripcion]')
+      .data('descripcion')
+
     $(modalID + ' #idCatalogo').val(catalogoID)
     $(modalID + ' #categoria').val(categoria)
     $(modalID + ' #descripcion').val(descripcion)
@@ -143,7 +147,9 @@ $(document).ready(function () {
     var precio = tr.find('[data-precio]').data('precio')
     var stock = tr.find('[data-stock]').data('stock')
     var fotografia = tr.find('[data-fotografia]').data('fotografia')
-    var nombreProveedor = tr.find('[data-nombreProveedor]').data('nombreproveedor')
+    var nombreProveedor = tr
+      .find('[data-nombreProveedor]')
+      .data('nombreproveedor')
     var categoria = tr.find('[data-categoria]').data('categoria')
 
     // Asignar los valores al formulario y mostrar el modal

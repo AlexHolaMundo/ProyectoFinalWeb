@@ -14,6 +14,7 @@ urlpatterns = [
     path('actualizarCliente/', views.actualizarCliente),
     path('obtenerEstadisticasDireccion/', views.estadisticasDireccion, name='obtener_estadisticas_direccion'),
     path('obtener_cantidad_clientes/', views.obtener_cantidad_clientes, name='obtener_cantidad_clientes'),
+
     #Rutas Pedido
     path('listaPedidos/', views.listaPedidos),
     path('guardarPedido/', views.guardarPedido),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('actualizarPedido/', views.actualizarPedido),
     path('obtenerEstadisticasFecha/', views.estadisticasFecha, name='obtener_estadisticas_fecha'),
     path('obtener_cantidad_pedidos/', views.obtener_cantidad_pedidos, name='obtener_cantidad_pedidos'),
+
     #Rutas Proveedor
     path('listaProveedores/', views.listaProveedores),
     path('guardarProveedor/', views.guardarProveedor),
@@ -30,7 +32,7 @@ urlpatterns = [
     path('actualizacionProveedor/', views.actualizacionProveedor),
     path('obtenerEstadisticasPais/', views.estadisticasPais, name='obtener_estadisticas_pais'),
     path('obtener_cantidad_proveedores/', views.obtener_cantidad_proveedores, name='obtener_cantidad_proveedores'),
-       
+
     #Rutas Catalogo
     path('listaCatalogos/', views.listaCatalogos),
     path('guardarCatalogo/', views.guardarCatalogo),
@@ -38,7 +40,7 @@ urlpatterns = [
     path('eliminarCatalogo/<idCatalogo>', views.eliminarCatalogo),
     path('actualizacionCatalogo/', views.actualizacionCatalogo),
     path('obtener_cantidad_catalogos/', views.obtener_cantidad_Catalogos, name='obtener_cantidad_catalogos'),
-    
+
     #Rutas Productos
     path('listaProductos/', views.listaProductos),
     path('guardarProducto/', views.guardarProducto),
@@ -47,7 +49,7 @@ urlpatterns = [
     path('actualizarProducto/', views.actualizarProducto),
     path('obtenerEstadisticaProducto/', views.estadisticaProducto, name='obtener_estadistica_producto'),
     path('obtener_cantidad_productos/', views.obtener_cantidad_Productos, name='obtener_cantidad_productos'),
-    
+
     #Rutas Detalle
     path('listaDetalles/', views.listaDetalles),
     path('guardarDetalle/', views.guardarDetalle),
@@ -56,6 +58,7 @@ urlpatterns = [
     path('actualizarDetalle/', views.actualizarDetalle),
     path('obtener_cantidad_detalles/', views.obtener_cantidad_detalles, name='obtener_cantidad_detalles'),
     path('obtenerEstadisticasProducto/', views.estadisticasProducto, name='obtener_estadisticas_producto'),
+
     #Ruta Correo Electronico
     path('enviarCorreo/', views.enviarCorreo),
     ]

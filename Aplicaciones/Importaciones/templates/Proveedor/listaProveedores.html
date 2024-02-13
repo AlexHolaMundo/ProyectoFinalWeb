@@ -127,8 +127,7 @@
                     <td class="text-center" data-ciudad="{{proveedor.ciudad}}">
                       {{proveedor.ciudad}}
                     </td>
-
-                    <td class="text-center">
+                    <td class="text-center" data-logo="{{proveedor.logo.url}}">
                       {% if proveedor.logo %}
                       <a href="{{proveedor.logo.url}}" target="_blank">
                         <img
@@ -147,7 +146,7 @@
                       <a
                         href=""
                         data-toggle="modal"
-                        data-target="#modalEditar{{proveedor.idProveedor}}"
+                        data-target="#modalEditarProveedor{{proveedor.idProveedor}}"
                         data-proveedor-id="{{proveedor.idProveedor}}"
                         class="btn-editar-trigger-proveedor"
                       >
@@ -178,11 +177,11 @@
 <!-- Modal -->
 <div
   class="modal fade"
-  id="modalEditar{{proveedor.idProveedor}}"
+  id="modalEditarProveedor{{proveedor.idProveedor}}"
   tabindex="-1"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <div class="pagetitle">
@@ -212,7 +211,7 @@
             value="{{proveedor.idProveedor}}"
           />
           <div class="col-md-6">
-            <label for="" class="form-label">nombre</label>
+            <label for="" class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
@@ -223,11 +222,11 @@
           </div>
 
           <div class="col-md-6">
-            <label for="" class="form-label">pais</label>
+            <label for="" class="form-label">Pais</label>
             <input type="text" class="form-control" id="pais" name="pais" />
           </div>
           <div class="col-md-6">
-            <label for="" class="form-label">ciudad</label>
+            <label for="" class="form-label">Ciudad</label>
             <input
               type="text"
               class="form-control"
@@ -237,7 +236,7 @@
             />
           </div>
           <div class="col-md-6">
-            <label for="" class="form-label">email</label>
+            <label for="" class="form-label">Email</label>
             <input
               type="email"
               class="form-control"
@@ -246,17 +245,24 @@
               value="{{proveedor.email}}"
             />
           </div>
-          <div class="col-md-6">
-            <label for="">Logo Actual</label>
+          <div class="col-md-12">
+            <label for="">Actualizar logo Opcional</label>
             {% if proveedor.logo %}
-            <a href="{{proveedor.logg.url}}" target="_blank"
-              ><img
-                src="{{proveedor.logg.url}}"
-                alt="Logo del proveedor"
-                class="img-fluid"
-            /></a>
+            <input
+              type="file"
+              class="form-control"
+              id="logo"
+              name="logo"
+              accept="image/*"
+            />
             {% else %}
-            <p>No hay logo</p>
+            <input
+              type="file"
+              class="form-control"
+              id="logo"
+              name="logo"
+              accept="image/*"
+            />
             {% endif %}
           </div>
           <div class="text-center">

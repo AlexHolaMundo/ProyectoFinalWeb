@@ -13,3 +13,11 @@ $(document).ready(function () {
     language: 'es',
   })
 })
+//Proveedores
+$(document).ready(function () {
+  $('#logo').fileinput({
+    showUpload: true,
+    showRemove: true,
+    language: 'es',
+  })
+})

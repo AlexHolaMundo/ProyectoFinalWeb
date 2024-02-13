@@ -124,20 +124,23 @@ def editarProveedor(request,idProveedor):
     return render(request,'editarProveedor.html',{'proveedor':proveedorEditar})
 
 #Actualizar datos de Proveedores
-def actualizacionProveedor(request,idProveedor):
-    idProveedor=request.POST["idProveedor"]
+def actualizacionProveedor(request):
+    id=request.POST["idProveedor"]
     nombre=request.POST['nombre']
     email=request.POST['email']
     pais=request.POST['pais']
     ciudad=request.POST['ciudad']
     logo=request.FILES.get('logo')
-    proveedorEditar=Proveedor.objects.get(idProveedor=idProveedor)
-    proveedorEditar.nombre=nombre
-    proveedorEditar.email=email
-    proveedorEditar.pais=pais
-    proveedorEditar.ciudad=ciudad
-    proveedorEditar.logo=logo
-    proveedorEditar.save()
+    proveedorActualizar=Proveedor.objects.get(idProveedor=id)
+    proveedorActualizar.nombre=nombre
+    proveedorActualizar.email=email
+    proveedorActualizar.pais=pais
+    proveedorActualizar.ciudad=ciudad
+
+    if logo:
+        proveedorActualizar.logo=logo
+    proveedorActualizar.save()
+
     messages.success(request,'Proveedor actualizado correctamente')
     return redirect('/listaProveedores')
 
