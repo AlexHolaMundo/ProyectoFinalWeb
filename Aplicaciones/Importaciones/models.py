@@ -37,18 +37,6 @@ class Catalogo(models.Model):
         fila='{0} => {1} => {2}'
         return fila.format(self.idCatalogo, self.categoria, self.descripcion)
 
-class Pedido(models.Model):
-    idPedido=models.AutoField(primary_key=True)
-    fechaPedido=models.DateField()
-    fechaEntrega=models.DateField()
-    observaciones=models.CharField(max_length=150)
-    direccionEntrega=models.CharField(max_length=150)
-    cliente=models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
-
-    def __str__(self):
-        fila = '{0} => {1} => {2} => {3} => {4} => {5}'
-        return fila.format(self.idPedido, self.fechaPedido, self.fechaEntrega, self.observaciones, self.direccionEntrega, self.cliente.nombre)
-
 class Producto(models.Model):
     idProducto=models.AutoField(primary_key=True)
     nombre=models.CharField(max_length=50)
@@ -62,6 +50,18 @@ class Producto(models.Model):
     def __str__(self):
         fila = '{0} = {1} = {2} = {3} = {4} = {5} = {6}'
         return fila.format(self.idProducto, self.nombre, self.precio, self.descripcion, self.stock, self.catalogo, self.proveedor)
+
+class Pedido(models.Model):
+    idPedido=models.AutoField(primary_key=True)
+    fechaPedido=models.DateField()
+    fechaEntrega=models.DateField()
+    observaciones=models.CharField(max_length=150)
+    direccionEntrega=models.CharField(max_length=150)
+    cliente=models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        fila = '{0} => {1} => {2} => {3} => {4} => {5}'
+        return fila.format(self.idPedido, self.fechaPedido, self.fechaEntrega, self.observaciones, self.direccionEntrega, self.cliente.nombre)
 
 
 class Detalle(models.Model):
