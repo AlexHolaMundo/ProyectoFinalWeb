@@ -492,3 +492,7 @@ def buscarClientes(request):
     else:
         clientes = Cliente.objects.all()
     return render(request, 'Cliente/listaClientes.html', {'clientes': clientes})
+
+#pagina no encontrada
+def error_404(request):
+    return render(request, '404Page/404.html', status=404)

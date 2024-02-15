@@ -2,7 +2,9 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path, re_path
 urlpatterns = [
+    re_path(r'^.*/$', views.error_404),
     #Ruta Inicio
     path('', views.home),
 
@@ -62,6 +64,9 @@ urlpatterns = [
     #Ruta Correo Electronico
     path('enviarCorreo/', views.enviarCorreo),
     path('buscarClientes/', views.buscarClientes, name='buscar_clientes'),
+
+    #Ruta404
+    path('404/', views.error_404),
 
     ]
 if settings.DEBUG:
